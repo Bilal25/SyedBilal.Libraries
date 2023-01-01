@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="color_white">#ffffff</color>
+    <color name="color_transparent">#00000000</color>
+    <color name="color_video_transparent">#88000000</color>
+    <color name="color_black">#000000</color>
+
+    <color name="color_unplayed">#323232</color>
+    <color name="color_buffered">#b2b2b2</color>
+    <color name="color_linebar">#e5e5e5</color>
+    <color name="chat_textcolor">#7b7b7b</color>
+    <color name="chat_timecolor">#d6d6d6</color>
+
+    <color name="date_c_f">#9D9D9D</color>
+
+
+    <color name="lineviewcolor">#303030</color>
+
+    <color name="colorPrimary">#1e1e1e</color>
+    <color name="colorPrimaryDark">#1e1e1e</color>
+
+    <color name="testbk">#1e1e1e</color>
+    <color name="sidemenu_cellcolor">#121212</color>
+
+    <color name="sidemenu_textcolor">#b7b7b7</color>
+
+
+<!--    <color name="colorPrimary">#1e1e1e</color>-->
+<!--    <color name="colorPrimaryDark">#1e1e1e</color>-->
+    <color name="colorAccent">#6DA200</color>
+    <color name="colorShade">#8FC6EC7F</color>
+
+    <color name="textgreen">#93da00</color>
+
+    <color name="slidemenu">#232323</color>
+    e8e8e8
+    <color name="divercolor">#F2F2F2</color>
+    <color name="linebar">#e8e8e8</color>
+
+    <color name="colorback">#2A2A2A</color>
+
+    <color name="bottombars">#181818</color>
+
+
+    <color name="fragementbgcolor">#000000</color>
+    <color name="colorTransparent">@android:color/transparent</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="themeBackground">#000000</color>
+    <color name="colorOrange">#EB7A39</color>
+    <color name="colorBlue">#164386</color>
+    <color name="colourBlack">#000000</color>
+    <color name="titlebarcolor">#2A2A2A</color>
+
+    <color name="colourDialogButton">#EB7A39</color>
+    <color name="colorfeedtextdes">#616161</color>
+    <color name="colorfeedtextname">#1f1f1f</color>
+    <color name="colorfeedtextdate">#8d8d8d</color>
+    <color name="bgfragment">#2A2A2A</color>
+
+
+    <color name="detailtext">#303030</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="orange">#EC7B39</color>
+    <color name="red">#FE0000</color>
+    <color name="profile_solid">#0E58AB</color>
+
+    <color name="green_color">#6DA200</color>
+
+    <color name="action_bar">#242424</color>
+
+    <color name="text_c">#313131</color>
+
+
+    <color name="back_ground_signup">#f8f8f8</color>
+
+    <color name="languagetextcolor">#7c7c7c</color>
+    <color name="linecolor">#a5a5a5</color>
+    <color name="lightgrey">#3CA39999</color>
+    <color name="playerbg">#282828</color>
+
+
+
+
+</resources>

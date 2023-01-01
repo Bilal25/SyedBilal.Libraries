@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SocialViewStyle">
+        <attr name="socialViewStyle" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="SocialView">
+        <!-- Determine whether each feature should be turned on/off.
+             Default is `hashtag|mention|hyperlink`. -->
+        <attr name="socialFlags">
+            <flag name="hashtag" value="1" />
+            <flag name="mention" value="2" />
+            <flag name="hyperlink" value="4" />
+        </attr>
+
+        <!-- Color of each feature.
+             If particular feature is not enabled, this value will be ignored.
+             Default is color accent of current theme. -->
+        <attr name="hashtagColor" format="color" />
+        <attr name="mentionColor" format="color" />
+        <attr name="hyperlinkColor" format="color" />
+    </declare-styleable>
+  <array name="material_calendar_day_abbreviations_array">
+            <item>Sunday</item>
+            <item>Monday</item>
+            <item>Tuesday</item>
+            <item>Wednesday</item>
+            <item>Thursday</item>
+            <item>Friday</item>
+            <item>Saturday</item>
+        </array>
+        <array name="material_calendar_months_array">
+            <item>January</item>
+            <item>February</item>
+            <item>March</item>
+            <item>April</item>
+            <item>May</item>
+            <item>June</item>
+            <item>July</item>
+            <item>August</item>
+            <item>September</item>
+            <item>October</item>
+            <item>November</item>
+            <item>December</item>
+        </array>
+        <attr format="enum" name="type">
+            <enum name="classic" value="0"/>
+            <enum name="one_day_picker" value="1"/>
+            <enum name="many_days_picker" value="2"/>
+            <enum name="range_picker" value="3"/>
+        </attr>
+        <color name="currentMonthDayColor">#de000000</color>
+        <color name="daysLabelColor">#000000</color>
+        <color name="defaultColor">#2962FF</color>
+        <color name="disabledDialogButtonColor">#000000</color>
+        <color name="itemFocusedColor">#000000</color>
+        <color name="itemHighlightColor">#000000</color>
+        <color name="nextMonthDayColor">#000000</color>
+       <dimen name="day_label_focus_size_events_disabled">42dp</dimen>
+        <dimen name="day_label_focus_size_events_enabled">34dp</dimen>
+        <dimen name="day_label_size_events_disabled">38dp</dimen>
+        <dimen name="day_label_size_events_enabled">30dp</dimen>
+        <dimen name="row_height">44dp</dimen>
+
+        <declare-styleable name="CalendarView">
+            <attr format="color" name="headerColor"/>
+            <attr format="color" name="headerLabelColor"/>
+            <attr format="integer" name="previousButtonSrc"/>
+            <attr format="integer" name="forwardButtonSrc"/>
+            <attr format="color" name="todayLabelColor"/>
+            <attr format="color" name="selectionColor"/>
+            <attr format="color" name="selectionLabelColor"/>
+            <attr format="color" name="disabledDaysLabelsColor"/>
+            <attr format="color" name="highlightedDaysLabelsColor"/>
+            <attr format="color" name="abbreviationsBarColor"/>
+            <attr format="color" name="abbreviationsLabelsColor"/>
+            <attr format="color" name="daysLabelsColor"/>
+            <attr format="color" name="anotherMonthsDaysLabelsColor"/>
+            <attr format="boolean" name="datePicker"/>
+            <attr format="boolean" name="eventsEnabled"/>
+            <attr format="boolean" name="swipeEnabled"/>
+            <attr format="integer" name="maximumDaysRange"/>
+            <attr name="type"/>
+        </declare-styleable>
+
+
+</resources>
