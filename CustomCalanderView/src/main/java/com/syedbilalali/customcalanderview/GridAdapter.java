@@ -73,6 +73,7 @@ public class GridAdapter extends ArrayAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         Date mDate = monthlyDates.get(position);
         final TextView cellNumber;
+        final LinearLayout lv;
         final View eventIndicator,eventIndicatorday;
         Calendar dateCal = Calendar.getInstance();
         dateCal.setTime(mDate);
@@ -126,13 +127,13 @@ public class GridAdapter extends ArrayAdapter {
             cellNumber = (TextView) view.findViewById(R.id.calendar_date_id);
             cellNumber.setText(String.valueOf(dayValue));
 
-            final LinearLayout lv = (LinearLayout)view.findViewById(R.id.event_wrapper);
+             lv = (LinearLayout)view.findViewById(R.id.event_wrapper);
             if (displayMonth == currentMonth && displayYear == currentYear) {
-                cellNumber.setTextColor(Color.WHITE);
+                cellNumber.setTextColor(Color.BLACK);
 
                 callrecycler(lv,dayValue,eventIndicator,sDate,displayMonth);
             } else {
-                cellNumber.setTextColor(ContextCompat.getColor(getContext(), R.color.color_black));
+                cellNumber.setTextColor(ContextCompat.getColor(getContext(), R.color.lightgrey));
 
             }
 
@@ -215,8 +216,10 @@ public class GridAdapter extends ArrayAdapter {
             final int displayMonthv1 = dateCalv1.get(Calendar.MONTH) + 1;
             //   if(day.equals(date)){
                 if (day.equals(date) && displayMonthv1 == displayMonth) {
-                    eventIndicator.setVisibility(View.VISIBLE);
-                break;
+                   // eventIndicator.setVisibility(View.VISIBLE);
+                    lv.setBackgroundResource(R.drawable.greencircle);
+
+                    break;
             }
 
         }

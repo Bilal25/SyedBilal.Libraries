@@ -161,8 +161,8 @@ public class CalendarCustomView extends LinearLayout {
     private String getDate(String date) {
         try {
             //.DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-           // displayYear+"-"+"0"+currentMonth+"-"+dateno;
-           // DateFormat sdf = new SimpleDateFormat("EEE.dd-MMM-yyyy");
+            // displayYear+"-"+"0"+currentMonth+"-"+dateno;
+            // DateFormat sdf = new SimpleDateFormat("EEE.dd-MMM-yyyy");
             DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date netDate = (new Date(Long.parseLong(date)));
             return sdf.format(netDate);
@@ -171,4 +171,18 @@ public class CalendarCustomView extends LinearLayout {
         }
     }
 
-}
+        private String getDatediff (String date1, String date2){
+
+            try {
+               ArrayList<Date>  dates = new ArrayList<Date>();
+
+
+
+                return sdf.format(netDate);
+            } catch (Exception ignored) {
+                return "xx";
+            }
+
+        }
+
+    }
