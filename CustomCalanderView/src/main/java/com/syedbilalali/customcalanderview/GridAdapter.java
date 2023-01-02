@@ -128,6 +128,7 @@ public class GridAdapter extends ArrayAdapter {
             cellNumber.setText(String.valueOf(dayValue));
 
              lv = (LinearLayout)view.findViewById(R.id.event_wrapper);
+            lv.setBackgroundResource(0);
             if (displayMonth == currentMonth && displayYear == currentYear) {
                 cellNumber.setTextColor(Color.BLACK);
 
@@ -147,30 +148,30 @@ public class GridAdapter extends ArrayAdapter {
 
 
 
-            cellNumber.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                        previousposition = position;
-                        notifyDataSetChanged();
-                        eventIndicatorday.setVisibility(View.VISIBLE);
-                        eventIndicatorday.setBackgroundColor(getContext().getResources().getColor(R.color.green_color));
-                       // cellNumber.setBackgroundResource(R.drawable.greencircle);
-
-                        Date mDate = monthlyDates.get(position);
-                        Log.i(TAG, "onItemClick: "+mDate.getTime());
-                        String d = String.valueOf(mDate.getTime());
-                        String dates = getDate(d);
-                        Toast.makeText(getContext(), "Clicked " + dates, Toast.LENGTH_LONG).show();
-
-                        allEvents.clear();
-//                        if(CalanderFragment.not_detail != null){
-//                            CalanderFragment.not_detail.calldata(dates);
-//                        }
-                    //mAdapter.setview(position);
-
-                }
-            });
+//            cellNumber.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//
+//                        previousposition = position;
+//                        notifyDataSetChanged();
+//                        eventIndicatorday.setVisibility(View.VISIBLE);
+//                        eventIndicatorday.setBackgroundColor(getContext().getResources().getColor(R.color.green_color));
+//                       // cellNumber.setBackgroundResource(R.drawable.greencircle);
+//
+//                        Date mDate = monthlyDates.get(position);
+//                        Log.i(TAG, "onItemClick: "+mDate.getTime());
+//                        String d = String.valueOf(mDate.getTime());
+//                        String dates = getDate(d);
+//                        Toast.makeText(getContext(), "Clicked " + dates, Toast.LENGTH_LONG).show();
+//
+//                        allEvents.clear();
+////                        if(CalanderFragment.not_detail != null){
+////                            CalanderFragment.not_detail.calldata(dates);
+////                        }
+//                    //mAdapter.setview(position);
+//
+//                }
+//            });
 
             if(previousposition != 0)
             if(previousposition == position){

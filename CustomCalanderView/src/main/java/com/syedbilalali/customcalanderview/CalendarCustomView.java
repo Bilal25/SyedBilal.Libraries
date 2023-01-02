@@ -12,8 +12,10 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,7 +47,8 @@ public class CalendarCustomView extends LinearLayout {
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
     private Context context;
     private GridAdapter mAdapter;
-
+    private boolean dateType = false;
+    private String firstDate,seconDate;
     public CalendarCustomView(Context context) {
         super(context);
     }
@@ -57,8 +60,9 @@ public class CalendarCustomView extends LinearLayout {
         setUpCalendarAdapter();
         setPreviousButtonClickEvent();
         setNextButtonClickEvent();
-        //setGridCellClickEvents();
+        setGridCellClickEvents();
         setallevent(allEvents);
+        openRangePicker("","");
         
         Log.d(TAG, "I need to call this method");
     }
@@ -68,7 +72,7 @@ public class CalendarCustomView extends LinearLayout {
           this.allEvents = list;
         if(mAdapter != null)
             mAdapter.update(allEvents);
-          mAdapter.notifyDataSetChanged();
+             mAdapter.notifyDataSetChanged();
     }
 
     public CalendarCustomView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -113,13 +117,31 @@ public class CalendarCustomView extends LinearLayout {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-               //String current = displayYear+"-"+"0"+currentMonth+"-"+dateno;
+              // String current = displayYear+"-"+"0"+currentMonth+"-"+dateno;
 //                Date mDate = monthlyDates.get(position);
 //                Log.i(TAG, "onItemClick: "+mDate.getTime());
 //                String d = String.valueOf(mDate.getTime());
 //                String dates = getDate(d);
-//                Toast.makeText(context, "Clicked " + dates, Toast.LENGTH_LONG).show();
-//                //mAdapter.setview(position);
+                SimpleDateFormat formatterdate = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                Calendar cal1 = Calendar.getInstance();
+                cal1.setTime(dayValueInCells.get(position));
+                String dates = formatterdate.format(cal1.getTime());
+                if(dateType) {
+                    dateType =false;
+                    seconDate = dates;
+                    openRangePicker(firstDate,seconDate);
+                }else {
+                        allEvents.clear();
+                        dateType = true;
+                        firstDate = dates;
+                        setallevent(allEvents);
+
+                }
+
+
+               // openRangePicker("","");
+
+                //mAdapter.setview(position);
             }
         });
     }
@@ -171,16 +193,52 @@ public class CalendarCustomView extends LinearLayout {
         }
     }
 
-        private String getDatediff (String date1, String date2){
+
+    private void openRangePicker(String firstdate, String seconddate) {
+        if(firstdate != "" && seconddate != "") {
+            ArrayList dates = getDatediff(firstdate, seconddate);
+            if (dates != null) {
+                setallevent(allEvents);
+            }
+        }
+    }
+
+
+    private ArrayList getDatediff (String dateString1, String dateString2){
 
             try {
+                allEvents.clear();
                ArrayList<Date>  dates = new ArrayList<Date>();
+                EventObjects jdb = null;
+                Date date1 = null;
+                Date date2 = null;
 
+                try {
+                    DateFormat df1  = new SimpleDateFormat("dd/MM/yyyy");
+                     date1 =  df1.parse(dateString1);
+                     date2 =   df1.parse(dateString2);
 
+                } catch  (ParseException e) {
+                    e.printStackTrace();
+                }
 
-                return sdf.format(netDate);
+                 Calendar cal1 = Calendar.getInstance();
+                  cal1.setTime(date1);
+                 Calendar cal2 = Calendar.getInstance();
+                 cal2.setTime(date2);
+
+                while (!cal1.after(cal2)) {
+                    dates.add(cal1.getTime());
+                    cal1.add(Calendar.DATE, 1);
+                    int dayOfWeek = cal1.get(Calendar.DAY_OF_WEEK);
+                    jdb = new EventObjects(dayOfWeek,"test",cal1.getTime());
+                    allEvents.add(jdb);
+
+                }
+
+                return allEvents;
             } catch (Exception ignored) {
-                return "xx";
+                return null;
             }
 
         }
