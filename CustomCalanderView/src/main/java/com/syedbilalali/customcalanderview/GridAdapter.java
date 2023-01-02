@@ -42,7 +42,8 @@ public class GridAdapter extends ArrayAdapter {
     int das;
     private int previousposition= 0;
     String updatemonth,updateyear,currentda;
-    String sDate,checkdate;
+    String sDate;
+    String checkdate;
     private Date oneWayTripDate;
 
 
@@ -128,7 +129,8 @@ public class GridAdapter extends ArrayAdapter {
             final LinearLayout lv = (LinearLayout)view.findViewById(R.id.event_wrapper);
             if (displayMonth == currentMonth && displayYear == currentYear) {
                 cellNumber.setTextColor(Color.WHITE);
-                callrecycler(lv,dayValue,eventIndicator);
+
+                callrecycler(lv,dayValue,eventIndicator,sDate,displayMonth);
             } else {
                 cellNumber.setTextColor(ContextCompat.getColor(getContext(), R.color.color_black));
 
@@ -201,14 +203,19 @@ public class GridAdapter extends ArrayAdapter {
         return view;
     }
     public void update(ArrayList<EventObjects> list) {
-        allEvents.clear();
         allEvents.addAll(list);
         notifyDataSetChanged();
     }
-    private void callrecycler(LinearLayout lv, int dayValue, View eventIndicator) {
+    private void callrecycler(LinearLayout lv, int dayValue, View eventIndicator, String date, int displayMonth) {
         for (int k =0 ; k < allEvents.size(); k++){
-            if(allEvents.get(k).id == dayValue){
-                eventIndicator.setVisibility(View.VISIBLE);
+          String  day = formatter.format(allEvents.get(k).getDate().getTime());
+
+            Calendar dateCalv1 = Calendar.getInstance();
+            dateCalv1.setTime(allEvents.get(k).getDate());
+            final int displayMonthv1 = dateCalv1.get(Calendar.MONTH) + 1;
+            //   if(day.equals(date)){
+                if (day.equals(date) && displayMonthv1 == displayMonth) {
+                    eventIndicator.setVisibility(View.VISIBLE);
                 break;
             }
 

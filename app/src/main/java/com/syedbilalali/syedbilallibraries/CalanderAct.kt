@@ -1,8 +1,8 @@
 package com.syedbilalali.syedbilallibraries
 
-import android.content.Intent
 import android.net.ParseException
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.syedbilalali.customcalanderview.CalendarCustomView
 import com.syedbilalali.customcalanderview.EventObjects
@@ -18,7 +18,12 @@ class CalanderAct : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_calander)
         mView  = findViewById(R.id.custom_calendar_view) as CalendarCustomView
-        openRangePicker("01/01/2023","23/01/2023")
+        var btn  = findViewById(R.id.btnview) as Button
+        btn.setOnClickListener {
+            openRangePicker("15/01/2023","23/02/2023")
+
+        }
+
 
 
     }
@@ -52,7 +57,8 @@ class CalanderAct : AppCompatActivity() {
         while (!cal1.after(cal2)) {
             dates.add(cal1.time)
             cal1.add(Calendar.DATE, 1)
-             jdb = EventObjects("test",cal1.time)
+            val dayOfWeek: Int = cal1.get(Calendar.DAY_OF_WEEK)
+            jdb = EventObjects(dayOfWeek,"test",cal1.time)
             allEvents.add(jdb!!)
 
         }

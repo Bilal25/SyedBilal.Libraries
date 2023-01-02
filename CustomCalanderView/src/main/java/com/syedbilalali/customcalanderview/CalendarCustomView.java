@@ -68,7 +68,7 @@ public class CalendarCustomView extends LinearLayout {
           this.allEvents = list;
         if(mAdapter != null)
             mAdapter.update(allEvents);
-        //  mAdapter.notifyDataSetChanged();
+          mAdapter.notifyDataSetChanged();
     }
 
     public CalendarCustomView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -90,7 +90,6 @@ public class CalendarCustomView extends LinearLayout {
             @Override
             public void onClick(View v) {
                  callservices = true;
-                 allEvents.clear();
                  cal.add(Calendar.MONTH, -1);
                  setUpCalendarAdapter();
 
@@ -104,7 +103,6 @@ public class CalendarCustomView extends LinearLayout {
             public void onClick(View v) {
                 callservices = true;
                 cal.add(Calendar.MONTH, 1);
-                allEvents.clear();
                 setUpCalendarAdapter();
             }
         });
@@ -145,15 +143,15 @@ public class CalendarCustomView extends LinearLayout {
         currentDate.setText(sDate);
 
 
-        if(callservices){
-             SimpleDateFormat formatterdate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-             String dates = formatterdate.format(cal.getTime());
-             callservices = false;
-             allEvents.clear();
-//              if(CalanderFragment.not_detail != null){
-//                CalanderFragment.not_detail.callservices(dates);
-//            }
-        }
+//        if(callservices){
+//             SimpleDateFormat formatterdate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+//             String dates = formatterdate.format(cal.getTime());
+//             callservices = false;
+//             allEvents.clear();
+////              if(CalanderFragment.not_detail != null){
+////                CalanderFragment.not_detail.callservices(dates);
+////            }
+//        }
         callservices = false;
         dateset = String.valueOf(sDate);
         mAdapter = new GridAdapter(context, dayValueInCells, cal, allEvents);

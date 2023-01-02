@@ -9,9 +9,21 @@
     <com.syedbilalali.customcalanderview.CalendarCustomView
         android:id="@+id/custom_calendar_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="600dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints">
     </com.syedbilalali.customcalanderview.CalendarCustomView>
+
+
+    <Button
+        android:id="@+id/btnview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/custom_calendar_view"
+        tools:ignore="MissingConstraints">
+
+    </Button>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
