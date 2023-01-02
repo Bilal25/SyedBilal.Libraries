@@ -37,7 +37,8 @@ public class CalendarCustomView extends LinearLayout {
     private Button addEventButton;
     private boolean callservices = false;
     public static ArrayList<EventObjects> allEvents=new ArrayList<>();
-  //  var allEvents = java.util.ArrayList<EventObjects>()
+    //testcommit
+    //  var allEvents = java.util.ArrayList<EventObjects>()
     List<Date> dayValueInCells = new ArrayList<Date>();
     // ArrayList<jobdatasave> sy = new ArrayList<jobdatasave>();
    // private List<jobdatasave> jobarr;
