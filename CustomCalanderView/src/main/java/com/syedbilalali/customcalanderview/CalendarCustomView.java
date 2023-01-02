@@ -36,7 +36,7 @@ public class CalendarCustomView extends LinearLayout {
     private boolean callservices = false;
     public static ArrayList<EventObjects> allEvents=new ArrayList<>();
   //  var allEvents = java.util.ArrayList<EventObjects>()
-  List<Date> dayValueInCells = new ArrayList<Date>();
+    List<Date> dayValueInCells = new ArrayList<Date>();
     // ArrayList<jobdatasave> sy = new ArrayList<jobdatasave>();
    // private List<jobdatasave> jobarr;
     private static final int MAX_CALENDAR_COLUMN = 42;
@@ -67,7 +67,8 @@ public class CalendarCustomView extends LinearLayout {
 
           this.allEvents = list;
         if(mAdapter != null)
-          mAdapter.notifyDataSetChanged();
+            mAdapter.update(allEvents);
+        //  mAdapter.notifyDataSetChanged();
     }
 
     public CalendarCustomView(Context context, AttributeSet attrs, int defStyleAttr) {

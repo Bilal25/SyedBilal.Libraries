@@ -34,6 +34,8 @@ public class GridAdapter extends ArrayAdapter {
     public static List<Date> monthlyDates;
     private SimpleDateFormat formatter = new SimpleDateFormat("dd", Locale.ENGLISH);
     private Calendar currentDate;
+    public static  ArrayList<EventObjects> allEventV1;
+
     public  static int df;
     public static int finallist;
     public static boolean nm;
@@ -46,11 +48,11 @@ public class GridAdapter extends ArrayAdapter {
 
     int monthcur = 0;
     int daa,ye,mnth;
-    public GridAdapter(Context context, List<Date> monthlyDates, Calendar currentDate, ArrayList<EventObjects> allEvents) {
+    public GridAdapter(Context context, List<Date> monthlyDates, Calendar currentDate, ArrayList<EventObjects> allEvent) {
         super(context, R.layout.single_cell_layout);
         this.monthlyDates = monthlyDates;
         this.currentDate = currentDate;
-        // this.allEvents = allEvents;
+        this.allEventV1 = allEvent;
          mInflater = LayoutInflater.from(context);
 
         ///
@@ -184,7 +186,7 @@ public class GridAdapter extends ArrayAdapter {
             if(displayMonth == monthcur) {
                 if (dayValue == currentdas) {
                     cellNumber.setBackgroundResource(R.drawable.greencircle);
-                    //  cellNumber.setTextColor(Color.GREEN);
+                     cellNumber.setTextColor(Color.GREEN);
 
                     // cellNumber.setTextColor(Color.parseColor("#000"));
                     // cellNumber.setBackgroundColor(R.color.black);
