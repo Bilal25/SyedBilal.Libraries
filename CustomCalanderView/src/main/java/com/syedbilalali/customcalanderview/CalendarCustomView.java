@@ -136,6 +136,7 @@ public class CalendarCustomView extends LinearLayout {
                         dateType = true;
                         firstDate = dates;
                         setallevent(allEvents);
+                        openRangePicker(firstDate,firstDate);
 
                 }
 
@@ -197,6 +198,7 @@ public class CalendarCustomView extends LinearLayout {
 
     private void openRangePicker(String firstdate, String seconddate) {
         if(firstdate != "" && seconddate != "") {
+            allEvents.clear();
             ArrayList dates = getDatediff(firstdate, seconddate);
             if (dates != null) {
                 setallevent(allEvents);
@@ -224,15 +226,16 @@ public class CalendarCustomView extends LinearLayout {
                 }
 
                  Calendar cal1 = Calendar.getInstance();
-                  cal1.setTime(date1);
+                cal1.setTime(date1);
                  Calendar cal2 = Calendar.getInstance();
                  cal2.setTime(date2);
 
                 while (!cal1.after(cal2)) {
                     dates.add(cal1.getTime());
-                    cal1.add(Calendar.DATE, 1);
                     int dayOfWeek = cal1.get(Calendar.DAY_OF_WEEK);
                     jdb = new EventObjects(dayOfWeek,"test",cal1.getTime());
+                    cal1.add(Calendar.DATE, 1);
+                   // cal1.setTime(dates);
                     allEvents.add(jdb);
 
                 }

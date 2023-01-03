@@ -131,8 +131,7 @@ public class GridAdapter extends ArrayAdapter {
             lv.setBackgroundResource(0);
             if (displayMonth == currentMonth && displayYear == currentYear) {
                 cellNumber.setTextColor(Color.BLACK);
-
-                callrecycler(lv,dayValue,eventIndicator,sDate,displayMonth);
+                callrecycler(lv,cellNumber,dayValue,eventIndicator,sDate,displayMonth);
             } else {
                 cellNumber.setTextColor(ContextCompat.getColor(getContext(), R.color.lightgrey));
 
@@ -208,7 +207,7 @@ public class GridAdapter extends ArrayAdapter {
         allEvents.addAll(list);
         notifyDataSetChanged();
     }
-    private void callrecycler(LinearLayout lv, int dayValue, View eventIndicator, String date, int displayMonth) {
+    private void callrecycler(LinearLayout lv, TextView cellNumber, int dayValue, View eventIndicator, String date, int displayMonth) {
         for (int k =0 ; k < allEvents.size(); k++){
           String  day = formatter.format(allEvents.get(k).getDate().getTime());
 
@@ -219,6 +218,7 @@ public class GridAdapter extends ArrayAdapter {
                 if (day.equals(date) && displayMonthv1 == displayMonth) {
                    // eventIndicator.setVisibility(View.VISIBLE);
                     lv.setBackgroundResource(R.drawable.greencircle);
+                    cellNumber.setTextColor(Color.WHITE);
 
                     break;
             }
