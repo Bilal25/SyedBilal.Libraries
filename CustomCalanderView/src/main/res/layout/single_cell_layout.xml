@@ -13,11 +13,10 @@
         android:layout_height="match_parent">
         <LinearLayout
             android:id="@+id/event_backgroundv1"
-            android:layout_width="20dp"
+            android:layout_width="30dp"
             android:layout_marginLeft="10dp"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:background="@color/languagetextcolor"
-            android:padding="5dp"
             android:visibility="gone"
             android:layout_gravity="center"
             android:orientation="vertical">

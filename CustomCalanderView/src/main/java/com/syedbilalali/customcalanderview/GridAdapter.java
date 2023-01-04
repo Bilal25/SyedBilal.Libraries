@@ -78,7 +78,7 @@ public class GridAdapter extends ArrayAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         Date mDate = monthlyDates.get(position);
         final TextView cellNumber,calanderrate;
-        final LinearLayout lv1,lv2;
+       // final LinearLayout lv1,lv2;
         final RelativeLayout lv;
         final LinearLayout maincell;
         final View eventIndicator,eventIndicatorday;
@@ -138,19 +138,20 @@ public class GridAdapter extends ArrayAdapter {
             cellNumber.setText(String.valueOf(dayValue));
 
               lv = (RelativeLayout)view.findViewById(R.id.event_wrapper);
-              lv1 = (LinearLayout)view.findViewById(R.id.event_backgroundv1);
-              lv2 = (LinearLayout)view.findViewById(R.id.event_backgroundv2);
+//              lv1 = (LinearLayout)view.findViewById(R.id.event_backgroundv1);
+//              lv2 = (LinearLayout)view.findViewById(R.id.event_backgroundv2);
               maincell = (LinearLayout)view.findViewById(R.id.lir);
 
 //            lv1.setVisibility(View.GONE);
 //            lv2.setVisibility(View.GONE);
             lv.setBackgroundResource(0);
+            maincell.setBackgroundResource(0);
             cellNumber.setTextColor(Color.BLACK);
             maincell.setBackgroundColor(Color.WHITE);
-            lv1.setBackgroundColor(Color.WHITE);
-            lv2.setBackgroundColor(Color.WHITE);
-            lv1.setVisibility(View.GONE);
-            lv2.setVisibility(View.GONE);
+//            lv1.setBackgroundColor(Color.WHITE);
+//            lv2.setBackgroundColor(Color.WHITE);
+//            lv1.setVisibility(View.GONE);
+//            lv2.setVisibility(View.GONE);
 
             if (displayMonth == currentMonth && displayYear == currentYear) {
                 cellNumber.setTextColor(Color.BLACK);
@@ -169,10 +170,17 @@ public class GridAdapter extends ArrayAdapter {
                              if (day.equals(sDate) && month == displayMonth) {
                               lv.setBackgroundResource(R.drawable.greencircle);
                               cellNumber.setTextColor(Color.WHITE);
+//                                 lv1.setBackgroundColor(Color.GRAY);
+//                                 lv1.setVisibility(View.VISIBLE);
                               if(!firstRate.equals("")){
                                   calanderrate.setVisibility(View.VISIBLE);
                                   calanderrate.setText(firstRate);
                               }
+
+                                 if(eventsFirstLast.size() > 2){
+                                     maincell.setBackgroundResource(R.drawable.cellleftv1);
+                                     //maincell.setBackgroundResource(R.drawable.cellleft);
+                                 }
                            }
 
                     } catch (Exception e) {
@@ -191,9 +199,16 @@ public class GridAdapter extends ArrayAdapter {
                          if (day.equals(sDate) && month == displayMonth) {
                              lv.setBackgroundResource(R.drawable.greencircle);
                              cellNumber.setTextColor(Color.WHITE);
+//                             lv2.setBackgroundColor(Color.GRAY);
+//                             lv2.setVisibility(View.VISIBLE);
                              if(!secondRate.equals("")){
                                  calanderrate.setVisibility(View.VISIBLE);
                                  calanderrate.setText(secondRate);
+
+                             }
+
+                             if(eventsFirstLast.size() > 2){
+                                 maincell.setBackgroundResource(R.drawable.cellrightv1);
                              }
                           }
 
@@ -204,7 +219,7 @@ public class GridAdapter extends ArrayAdapter {
 
 
                     if(eventsFirstLast.size() > 2){
-                        callrecycler(lv1,lv2,eventsFirstLast,lv,cellNumber,dayValue,null,sDate,displayMonth,maincell,calanderrate);
+                        callrecycler(null,null,eventsFirstLast,lv,cellNumber,dayValue,null,sDate,displayMonth,maincell,calanderrate);
                     }
                   }
 
