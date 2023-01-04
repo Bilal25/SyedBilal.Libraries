@@ -63,7 +63,7 @@ public class CalendarCustomView extends LinearLayout {
         setUpCalendarAdapter();
         setPreviousButtonClickEvent();
         setNextButtonClickEvent();
-        setGridCellClickEvents();
+        setGridCellClickEvents(listDaysRate);
         setallevent(allEvents);
         openRangePicker("","");
 
