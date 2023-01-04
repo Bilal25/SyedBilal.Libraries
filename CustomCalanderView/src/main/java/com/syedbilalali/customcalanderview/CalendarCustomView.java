@@ -47,6 +47,9 @@ public class CalendarCustomView extends LinearLayout {
     private SimpleDateFormat formatter = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
     private Context context;
+
+    private ArrayList<String> listDaysRate = new ArrayList();
+
     private GridAdapter mAdapter;
     private boolean dateType = false;
     private String firstDate,seconDate;
@@ -117,7 +120,12 @@ public class CalendarCustomView extends LinearLayout {
         calendarGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                listDaysRate.clear();
+                listDaysRate.add("20");
+                listDaysRate.add("30");
+                listDaysRate.add("40");
+                listDaysRate.add("50");
+                listDaysRate.add("60");
                 // String current = displayYear+"-"+"0"+currentMonth+"-"+dateno;
 //                Date mDate = monthlyDates.get(position);
 //                Log.i(TAG, "onItemClick: "+mDate.getTime());
@@ -136,6 +144,8 @@ public class CalendarCustomView extends LinearLayout {
                     dateType = true;
                     firstDate = dates;
                     setallevent(allEvents);
+
+
                     openRangePicker(firstDate,firstDate);
 
                 }
@@ -211,17 +221,17 @@ public class CalendarCustomView extends LinearLayout {
 
         try {
             allEvents.clear();
-            ArrayList<Date>  dates = new ArrayList<Date>();
+            ArrayList<Date> dates = new ArrayList<Date>();
             EventObjects jdb = null;
             Date date1 = null;
             Date date2 = null;
 
             try {
-                DateFormat df1  = new SimpleDateFormat("dd/MM/yyyy");
-                date1 =  df1.parse(dateString1);
-                date2 =   df1.parse(dateString2);
+                DateFormat df1 = new SimpleDateFormat("dd/MM/yyyy");
+                date1 = df1.parse(dateString1);
+                date2 = df1.parse(dateString2);
 
-            } catch  (ParseException e) {
+            } catch (ParseException e) {
                 e.printStackTrace();
             }
 
@@ -233,14 +243,20 @@ public class CalendarCustomView extends LinearLayout {
             while (!cal1.after(cal2)) {
                 dates.add(cal1.getTime());
                 int dayOfWeek = cal1.get(Calendar.DAY_OF_WEEK);
-                jdb = new EventObjects(dayOfWeek,"test",cal1.getTime());
+                jdb = new EventObjects(dayOfWeek, "", cal1.getTime());
                 cal1.add(Calendar.DATE, 1);
                 // cal1.setTime(dates);
                 allEvents.add(jdb);
 
             }
 
-            return allEvents;
+             if(allEvents.size() == 5)
+             for (int k = 0; k < listDaysRate.size(); k++) {
+                 jdb = new EventObjects(allEvents.get(k).id, listDaysRate.get(k), allEvents.get(k).getDate());
+                 allEvents.set(k,jdb);
+              }
+
+                return allEvents;
         } catch (Exception ignored) {
             return null;
         }
