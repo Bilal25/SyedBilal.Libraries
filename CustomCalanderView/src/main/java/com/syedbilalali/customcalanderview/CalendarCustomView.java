@@ -12,7 +12,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -116,16 +115,13 @@ public class CalendarCustomView extends LinearLayout {
         });
     }
 
-    public void setGridCellClickEvents(){
+    public void setGridCellClickEvents(ArrayList<String> listDaysRateV1){
         calendarGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                listDaysRate.clear();
-                listDaysRate.add("20");
-                listDaysRate.add("30");
-                listDaysRate.add("40");
-                listDaysRate.add("50");
-                listDaysRate.add("60");
+                CalendarCustomView.this.listDaysRate.clear();
+                CalendarCustomView.this.listDaysRate = listDaysRateV1;
+
                 // String current = displayYear+"-"+"0"+currentMonth+"-"+dateno;
 //                Date mDate = monthlyDates.get(position);
 //                Log.i(TAG, "onItemClick: "+mDate.getTime());
@@ -250,7 +246,7 @@ public class CalendarCustomView extends LinearLayout {
 
             }
 
-             if(allEvents.size() == 5)
+             if(allEvents.size() > 6)
              for (int k = 0; k < listDaysRate.size(); k++) {
                  jdb = new EventObjects(allEvents.get(k).id, listDaysRate.get(k), allEvents.get(k).getDate());
                  allEvents.set(k,jdb);

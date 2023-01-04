@@ -1,18 +1,16 @@
 package com.syedbilalali.syedbilallibraries
 
-import android.net.ParseException
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.syedbilalali.customcalanderview.CalendarCustomView
 import com.syedbilalali.customcalanderview.EventObjects
-import java.text.DateFormat
-import java.text.SimpleDateFormat
 import java.util.*
 
 
 class CalanderAct : AppCompatActivity() {
     var allEvents = java.util.ArrayList<EventObjects>()
+    private val listDaysRate: ArrayList<String?> = ArrayList<String?>()
     var mView : CalendarCustomView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +21,7 @@ class CalanderAct : AppCompatActivity() {
 //            //openRangePicker("15/01/2023","23/02/2023")
 //        }
 
-        mView!!.setGridCellClickEvents();
+        mView!!.setGridCellClickEvents(listDaysRate);
 
 
 
