@@ -19,10 +19,10 @@ class CalanderAct : AppCompatActivity() {
         setContentView(R.layout.activity_main_calander)
         mView  = findViewById(R.id.custom_calendar_view) as CalendarCustomView
         var btn  = findViewById(R.id.btnview) as Button
-        btn.setOnClickListener {
-            //openRangePicker("15/01/2023","23/02/2023")
+//        btn.setOnClickListener {
+//            //openRangePicker("15/01/2023","23/02/2023")
+//        }
 
-        }
         mView!!.setGridCellClickEvents();
 
 

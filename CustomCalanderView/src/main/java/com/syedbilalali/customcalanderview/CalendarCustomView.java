@@ -41,7 +41,7 @@ public class CalendarCustomView extends LinearLayout {
     //  var allEvents = java.util.ArrayList<EventObjects>()
     List<Date> dayValueInCells = new ArrayList<Date>();
     // ArrayList<jobdatasave> sy = new ArrayList<jobdatasave>();
-   // private List<jobdatasave> jobarr;
+    // private List<jobdatasave> jobarr;
     private static final int MAX_CALENDAR_COLUMN = 42;
     private int month, year;
     private SimpleDateFormat formatter = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
@@ -64,16 +64,16 @@ public class CalendarCustomView extends LinearLayout {
         setGridCellClickEvents();
         setallevent(allEvents);
         openRangePicker("","");
-        
+
         Log.d(TAG, "I need to call this method");
     }
 
     public void setallevent(ArrayList<EventObjects> list) {
 
-          this.allEvents = list;
+        this.allEvents = list;
         if(mAdapter != null)
-            mAdapter.update(allEvents);
-             mAdapter.notifyDataSetChanged();
+            mAdapter.update(allEvents,firstDate,seconDate,list);
+        mAdapter.notifyDataSetChanged();
     }
 
     public CalendarCustomView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -94,9 +94,9 @@ public class CalendarCustomView extends LinearLayout {
         previousButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                 callservices = true;
-                 cal.add(Calendar.MONTH, -1);
-                 setUpCalendarAdapter();
+                callservices = true;
+                cal.add(Calendar.MONTH, -1);
+                setUpCalendarAdapter();
 
             }
         });
@@ -118,7 +118,7 @@ public class CalendarCustomView extends LinearLayout {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-              // String current = displayYear+"-"+"0"+currentMonth+"-"+dateno;
+                // String current = displayYear+"-"+"0"+currentMonth+"-"+dateno;
 //                Date mDate = monthlyDates.get(position);
 //                Log.i(TAG, "onItemClick: "+mDate.getTime());
 //                String d = String.valueOf(mDate.getTime());
@@ -132,16 +132,16 @@ public class CalendarCustomView extends LinearLayout {
                     seconDate = dates;
                     openRangePicker(firstDate,seconDate);
                 }else {
-                        allEvents.clear();
-                        dateType = true;
-                        firstDate = dates;
-                        setallevent(allEvents);
-                        openRangePicker(firstDate,firstDate);
+                    allEvents.clear();
+                    dateType = true;
+                    firstDate = dates;
+                    setallevent(allEvents);
+                    openRangePicker(firstDate,firstDate);
 
                 }
 
 
-               // openRangePicker("","");
+                // openRangePicker("","");
 
                 //mAdapter.setview(position);
             }
@@ -154,7 +154,7 @@ public class CalendarCustomView extends LinearLayout {
         mCal.set(Calendar.DAY_OF_MONTH, 1);
         int firstDayOfTheMonth = mCal.get(Calendar.DAY_OF_WEEK) - 1;
         mCal.add(Calendar.DAY_OF_MONTH, -firstDayOfTheMonth);
-       // while(dayValueInCells.size() < MAX_CALENDAR_COLUMN){
+        // while(dayValueInCells.size() < MAX_CALENDAR_COLUMN){
         dayValueInCells.clear();
         for (int k =0 ; k < MAX_CALENDAR_COLUMN; k++){
             dayValueInCells.add(mCal.getTime());
@@ -209,42 +209,42 @@ public class CalendarCustomView extends LinearLayout {
 
     private ArrayList getDatediff (String dateString1, String dateString2){
 
+        try {
+            allEvents.clear();
+            ArrayList<Date>  dates = new ArrayList<Date>();
+            EventObjects jdb = null;
+            Date date1 = null;
+            Date date2 = null;
+
             try {
-                allEvents.clear();
-               ArrayList<Date>  dates = new ArrayList<Date>();
-                EventObjects jdb = null;
-                Date date1 = null;
-                Date date2 = null;
+                DateFormat df1  = new SimpleDateFormat("dd/MM/yyyy");
+                date1 =  df1.parse(dateString1);
+                date2 =   df1.parse(dateString2);
 
-                try {
-                    DateFormat df1  = new SimpleDateFormat("dd/MM/yyyy");
-                     date1 =  df1.parse(dateString1);
-                     date2 =   df1.parse(dateString2);
-
-                } catch  (ParseException e) {
-                    e.printStackTrace();
-                }
-
-                 Calendar cal1 = Calendar.getInstance();
-                cal1.setTime(date1);
-                 Calendar cal2 = Calendar.getInstance();
-                 cal2.setTime(date2);
-
-                while (!cal1.after(cal2)) {
-                    dates.add(cal1.getTime());
-                    int dayOfWeek = cal1.get(Calendar.DAY_OF_WEEK);
-                    jdb = new EventObjects(dayOfWeek,"test",cal1.getTime());
-                    cal1.add(Calendar.DATE, 1);
-                   // cal1.setTime(dates);
-                    allEvents.add(jdb);
-
-                }
-
-                return allEvents;
-            } catch (Exception ignored) {
-                return null;
+            } catch  (ParseException e) {
+                e.printStackTrace();
             }
 
+            Calendar cal1 = Calendar.getInstance();
+            cal1.setTime(date1);
+            Calendar cal2 = Calendar.getInstance();
+            cal2.setTime(date2);
+
+            while (!cal1.after(cal2)) {
+                dates.add(cal1.getTime());
+                int dayOfWeek = cal1.get(Calendar.DAY_OF_WEEK);
+                jdb = new EventObjects(dayOfWeek,"test",cal1.getTime());
+                cal1.add(Calendar.DATE, 1);
+                // cal1.setTime(dates);
+                allEvents.add(jdb);
+
+            }
+
+            return allEvents;
+        } catch (Exception ignored) {
+            return null;
         }
 
     }
+
+}
