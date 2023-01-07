@@ -1882,10 +1882,10 @@ public class IndicatorSeekBar extends View {
      *
      * @param format the format for indicator text
      */
-    public void setIndicatorTextFormat(String format) {
+    public void setIndicatorTextFormat(String format,int color) {
         this.mIndicatorTextFormat = format;
         initTextsArray();
-        updateStayIndicator(mIndicatorColor);
+        updateStayIndicator(color);
     }
 
     /**

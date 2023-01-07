@@ -37,7 +37,7 @@ class CalanderAct : AppCompatActivity() {
         //custom indicator text
         val percent_indicator: IndicatorSeekBar =
             findViewById<IndicatorSeekBar>(R.id.percent_indicator)
-        percent_indicator.setIndicatorTextFormat("\${PROGRESS} %")
+        percent_indicator.setIndicatorTextFormat("\${PROGRESS} %",Color.parseColor("#000000"))
         percent_indicator.setOnSeekChangeListener(object : OnSeekChangeListener {
             override fun onSeeking(seekParams: SeekParams) {
 

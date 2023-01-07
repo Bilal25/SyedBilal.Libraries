@@ -202,6 +202,7 @@ public class Indicator {
             ((CircleBubbleView) mIndicatorView).setProgress(text);
         } else if (mProgressTextView != null) {
             mTopContentView.setBackgroundColor(color);
+            mArrowView.setColor(color);
             mProgressTextView.setText(text);
         }
     }
