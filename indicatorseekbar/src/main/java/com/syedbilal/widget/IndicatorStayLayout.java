@@ -1,11 +1,13 @@
 package com.syedbilal.widget;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import androidx.annotation.Nullable;
 
 /**
  * created by zhuangguangquan on 2018/5/27

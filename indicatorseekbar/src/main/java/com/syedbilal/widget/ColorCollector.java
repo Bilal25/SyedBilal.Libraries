@@ -1,7 +1,7 @@
 package com.syedbilal.widget;
 
 
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 
 /**
  * for collecting each section track color
