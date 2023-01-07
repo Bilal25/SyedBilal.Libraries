@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="colorPrimary">#008577</color>
+
+    <color name="transparent">#00ffffff</color>
+
+    <color name="black">#000000</color>
+    <color name="black_light">#CC000000</color>
+    <color name="lblack">#B4000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="blue">#2F8BFF</color>
+    <color name="red">#F44336</color>
+    <color name="hightrate">#F5b073</color>
+    <color name="hightratev2">#F58f42</color>
+
+    <color name="lowrate">#BFE0B0</color>
+
+    <color name="light_shade">#91AAD8</color>
+    <color name="dark_shade">#7A5CA7</color>
+    <color name="text_dark">#363436</color>
+
+
+    <color name="green_shade">#04D28F</color>
+
+    <color name="whitesh_lighter">#65F5F6F7</color>
+    <color name="whitesh_bg">#f5F6F7</color>
+    <color name="lightGrey">#E7E8EC</color>
+    <color name="darkGray">#7B7E85</color>
+    <color name="duskYellow">#FFBB00</color>
+    <color name="gray">#C4C4C4</color>
+
+    <color name="colorCardDay">#ffffffff</color>
+
+    <color name="cardBackground">#bfffffff</color>
+    <color name="colorTransparent">@android:color/transparent</color>
+
+    <color name="black_transparent">#14000000</color>
+    <color name="black_transparent_image">#46000000</color>
+    <color name="active_indicator">#EF473A</color>
+    <color name="ligthRed">#F44336</color>
+    <color name="inactive_indicator">#4D000000</color>
+
+    <color name="grey_600">#757575</color>
+    <color name="grey_300">#e0e0e0</color>
+    <color name="grey_200">#EEEEEE</color>
+    <color name="bg">#757575</color>
+    <color name="ef_grey">#9E9E9E</color>
+    <color name="tip_text_color">#CCCDCF</color>
+    <color name="tip_circle_background">#EAEAEA</color>
+    <color name="tip_text_color2">#A9A9A9</color>
+    <color name="light_gray">#cccccc</color>
+
+    <color name="yellow">#FFD321</color>
+    <color name="green">#4CAF50</color>
+
+</resources>

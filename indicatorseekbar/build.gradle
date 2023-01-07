@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+
+def VERSION_NAME = "2.1.2"
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'indicatorseekbar'
+
+    libraryName = 'IndicatorSeekbar'
+    artifact = 'indicatorseekbar'
+
+
+
+    libraryVersion = VERSION_NAME
+
+    developerId = 'syedbilal'
+    developerName = 'syedbilalali'
+    developerEmail = 'bilalalics181@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 27
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compileOnly 'com.android.support:appcompat-v7:27.1.1'
+}
+
+
+//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'

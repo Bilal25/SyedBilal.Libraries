@@ -16,14 +16,30 @@
     </com.syedbilalali.customcalanderview.CalendarCustomView>
 
 
-    <Button
-        android:id="@+id/btnview"
-        android:layout_width="wrap_content"
+    <com.syedbilal.widget.IndicatorStayLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/custom_calendar_view"
         tools:ignore="MissingConstraints">
 
-    </Button>
+        <!--your layout-->
+
+        <com.syedbilal.widget.IndicatorSeekBar
+            android:id="@+id/percent_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:isb_indicator_color="@color/blue"
+            app:isb_progress="76"
+            app:isb_show_indicator="rectangle"
+            app:isb_show_tick_texts="true"
+            app:isb_tick_texts_color="@color/red"
+            app:isb_ticks_count="2" />
+
+        <!--your layout-->
+
+    </com.syedbilal.widget.IndicatorStayLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

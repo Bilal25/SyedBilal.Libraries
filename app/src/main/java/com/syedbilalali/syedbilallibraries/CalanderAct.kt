@@ -1,10 +1,13 @@
 package com.syedbilalali.syedbilallibraries
 
+import android.graphics.Color
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.syedbilalali.customcalanderview.CalendarCustomView
 import com.syedbilalali.customcalanderview.EventObjects
+import com.syedbilal.widget.IndicatorSeekBar
+import com.syedbilal.widget.OnSeekChangeListener
+import com.syedbilal.widget.SeekParams
 import java.util.*
 
 
@@ -16,14 +19,39 @@ class CalanderAct : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_calander)
         mView  = findViewById(R.id.custom_calendar_view) as CalendarCustomView
-        var btn  = findViewById(R.id.btnview) as Button
+//        var btn  = findViewById(R.id.btnview) as Button
 //        btn.setOnClickListener {
 //            //openRangePicker("15/01/2023","23/02/2023")
 //        }
 
+        listDaysRate.add("20")
+        listDaysRate.add("30")
+        listDaysRate.add("40")
+        listDaysRate.add("50")
+        listDaysRate.add("60")
+        listDaysRate.add("70")
+        listDaysRate.add("80")
         mView!!.setGridCellClickEvents(listDaysRate);
 
 
+        //custom indicator text
+        val percent_indicator: IndicatorSeekBar =
+            findViewById<IndicatorSeekBar>(R.id.percent_indicator)
+        percent_indicator.setIndicatorTextFormat("\${PROGRESS} %")
+        percent_indicator.setOnSeekChangeListener(object : OnSeekChangeListener {
+            override fun onSeeking(seekParams: SeekParams) {
+
+                percent_indicator.setmIndicatorColor(Color.parseColor("#000000"))
+            }
+
+            override fun onStartTrackingTouch(seekBar: IndicatorSeekBar) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: IndicatorSeekBar) {
+
+            }
+        })
 
 
     }

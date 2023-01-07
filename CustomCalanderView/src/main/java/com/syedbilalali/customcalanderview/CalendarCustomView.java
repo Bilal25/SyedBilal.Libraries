@@ -119,8 +119,7 @@ public class CalendarCustomView extends LinearLayout {
         calendarGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CalendarCustomView.this.listDaysRate.clear();
-                CalendarCustomView.this.listDaysRate = listDaysRateV1;
+                listDaysRate = listDaysRateV1;
 
                 // String current = displayYear+"-"+"0"+currentMonth+"-"+dateno;
 //                Date mDate = monthlyDates.get(position);
