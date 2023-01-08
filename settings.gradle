@@ -15,4 +15,3 @@
 rootProject.name = "SyedBilal.Libraries"
 include ':app'
 include ':CustomCalanderView'
-include ':indicatorseekbar'
