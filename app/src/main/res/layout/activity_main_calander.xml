@@ -16,28 +16,28 @@
     </com.syedbilalali.customcalanderview.CalendarCustomView>
 
 
-<!--    <com.syedbilal.widget.IndicatorStayLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/custom_calendar_view"-->
-<!--        tools:ignore="MissingConstraints">-->
+    <com.syedbilalali.customindicatorseekbar.IndicatorStayLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/custom_calendar_view"
+        tools:ignore="MissingConstraints">
 
-<!--        &lt;!&ndash;your layout&ndash;&gt;-->
+        <!--your layout-->
 
-<!--        <com.syedbilal.widget.IndicatorSeekBar-->
-<!--            android:id="@+id/percent_indicator"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:isb_indicator_color="@color/blue"-->
-<!--            app:isb_progress="76"-->
-<!--            app:isb_show_indicator="rectangle"-->
-<!--            app:isb_show_tick_texts="true"-->
-<!--            app:isb_tick_texts_color="@color/red"-->
-<!--            app:isb_ticks_count="2" />-->
+        <com.syedbilalali.customindicatorseekbar.IndicatorSeekBar
+            android:id="@+id/percent_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:isb_indicator_color="@color/blue"
+            app:isb_progress="76"
+            app:isb_show_indicator="rectangle"
+            app:isb_show_tick_texts="true"
+            app:isb_tick_texts_color="@color/red"
+            app:isb_ticks_count="2" />
 
-<!--        &lt;!&ndash;your layout&ndash;&gt;-->
+        <!--your layout-->
 
-<!--    </com.syedbilal.widget.IndicatorStayLayout>-->
+    </com.syedbilalali.customindicatorseekbar.IndicatorStayLayout>
 
 
 

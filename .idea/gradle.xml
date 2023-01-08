@@ -11,6 +11,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/CustomCalanderView" />
+            <option value="$PROJECT_DIR$/Customindicatorseekbar" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
