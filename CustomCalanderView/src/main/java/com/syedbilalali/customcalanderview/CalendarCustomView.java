@@ -52,6 +52,7 @@ public class CalendarCustomView extends LinearLayout {
     private GridAdapter mAdapter;
     private boolean dateType = false;
     private String firstDate,seconDate;
+
     public CalendarCustomView(Context context) {
         super(context);
     }
