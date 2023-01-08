@@ -5,9 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.syedbilalali.customcalanderview.CalendarCustomView
 import com.syedbilalali.customcalanderview.EventObjects
-import com.syedbilal.widget.IndicatorSeekBar
-import com.syedbilal.widget.OnSeekChangeListener
-import com.syedbilal.widget.SeekParams
+
 import java.util.*
 
 
@@ -35,23 +33,23 @@ class CalanderAct : AppCompatActivity() {
 
 
         //custom indicator text
-        val percent_indicator: IndicatorSeekBar =
-            findViewById<IndicatorSeekBar>(R.id.percent_indicator)
-        percent_indicator.setIndicatorTextFormat("\${PROGRESS} %",Color.parseColor("#000000"))
-        percent_indicator.setOnSeekChangeListener(object : OnSeekChangeListener {
-            override fun onSeeking(seekParams: SeekParams) {
-
-                percent_indicator.setmIndicatorColor(Color.parseColor("#000000"))
-            }
-
-            override fun onStartTrackingTouch(seekBar: IndicatorSeekBar) {
-
-            }
-
-            override fun onStopTrackingTouch(seekBar: IndicatorSeekBar) {
-
-            }
-        })
+//        val percent_indicator: IndicatorSeekBar =
+//            findViewById<IndicatorSeekBar>(R.id.percent_indicator)
+//        percent_indicator.setIndicatorTextFormat("\${PROGRESS} %",Color.parseColor("#000000"))
+//        percent_indicator.setOnSeekChangeListener(object : OnSeekChangeListener {
+//            override fun onSeeking(seekParams: SeekParams) {
+//
+//                percent_indicator.setmIndicatorColor(Color.parseColor("#000000"))
+//            }
+//
+//            override fun onStartTrackingTouch(seekBar: IndicatorSeekBar) {
+//
+//            }
+//
+//            override fun onStopTrackingTouch(seekBar: IndicatorSeekBar) {
+//
+//            }
+//        })
 
 
     }
