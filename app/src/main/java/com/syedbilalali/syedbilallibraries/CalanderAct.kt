@@ -1,8 +1,9 @@
 package com.syedbilalali.syedbilallibraries
 
-import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.syedbilalali.customcalanderview.CalanderIItemClicked
 import com.syedbilalali.customcalanderview.CalendarCustomView
 import com.syedbilalali.customcalanderview.EventObjects
 
@@ -12,11 +13,11 @@ import java.util.*
 class CalanderAct : AppCompatActivity() {
     var allEvents = java.util.ArrayList<EventObjects>()
     private val listDaysRate: ArrayList<String?> = ArrayList<String?>()
-    var mView : CalendarCustomView? = null
+    var mView: CalendarCustomView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_calander)
-        mView  = findViewById(R.id.custom_calendar_view) as CalendarCustomView
+        mView = findViewById(R.id.custom_calendar_view) as CalendarCustomView
 //        var btn  = findViewById(R.id.btnview) as Button
 //        btn.setOnClickListener {
 //            //openRangePicker("15/01/2023","23/02/2023")
@@ -29,7 +30,7 @@ class CalanderAct : AppCompatActivity() {
         listDaysRate.add("60")
         listDaysRate.add("70")
         listDaysRate.add("80")
-        mView!!.setGridCellClickEvents(listDaysRate);
+        mView!!.setGridCellClickEvents(listDaysRate, itemClicked);
 
 
         //custom indicator text
@@ -53,6 +54,20 @@ class CalanderAct : AppCompatActivity() {
 
 
     }
+
+    private var itemClicked: CalanderIItemClicked =
+        object : CalanderIItemClicked {
+            override fun calanderIItemClicked(firstDate: String?, secondDate: String?, b: Boolean) {
+                Log.d("TAG", "calanderIItemClicked: "+firstDate +secondDate + b)
+            }
+
+
+        }
+
+
+}
+
+
 
 
 //    private fun openRangePicker(firstdate: String, seconddate: String) {
@@ -91,4 +106,3 @@ class CalanderAct : AppCompatActivity() {
 //
 //        return jdb
 //    }
-}

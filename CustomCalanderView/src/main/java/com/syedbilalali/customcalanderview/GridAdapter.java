@@ -3,6 +3,7 @@ package com.syedbilalali.customcalanderview;
 
 
 import static com.syedbilalali.customcalanderview.CalendarCustomView.allEvents;
+import static com.syedbilalali.customcalanderview.CalendarCustomView.selectDate;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -47,6 +48,7 @@ public class GridAdapter extends ArrayAdapter {
     String updatemonth,updateyear,currentda;
     String sDate;
     String checkdate;
+    private  boolean countValueStatus = false;
 
     private String firstRate;
     private String secondRate;
@@ -154,42 +156,46 @@ public class GridAdapter extends ArrayAdapter {
 //            lv1.setVisibility(View.GONE);
 //            lv2.setVisibility(View.GONE);
 
+            Calendar cal = Calendar.getInstance();
+            final int currentMonthcal = cal.get(Calendar.MONTH) + 1;
+            final int currentdascal = cal.get(Calendar.DAY_OF_MONTH);
+
+
             if (displayMonth == currentMonth && displayYear == currentYear) {
-                cellNumber.setTextColor(Color.BLACK);
-
-
-                if(eventsFirstLast.size() > 0){
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                    Date netDate = null;
-                    try {
+                if (dayValue >= currentdascal || displayMonth > currentMonthcal) {
+                    cellNumber.setTextColor(Color.BLACK);
+                    if (eventsFirstLast.size() > 0) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        Date netDate = null;
+                        try {
 
                             Calendar firstDateCal = Calendar.getInstance();
-                             firstDateCal.setTime(firstDateView);
-                             String day = formatter.format(firstDateCal.getTime());
-                             final int month = dateCal.get(Calendar.MONTH) + 1;
+                            firstDateCal.setTime(firstDateView);
+                            String day = formatter.format(firstDateCal.getTime());
+                            final int month = firstDateCal.get(Calendar.MONTH) + 1;
 
-                             if (day.equals(sDate) && month == displayMonth) {
-                              lv.setBackgroundResource(R.drawable.greencircle);
-                              cellNumber.setTextColor(Color.WHITE);
+                            if (day.equals(sDate) && month == displayMonth) {
+                                lv.setBackgroundResource(R.drawable.greencircle);
+                                cellNumber.setTextColor(Color.WHITE);
 //                                 lv1.setBackgroundColor(Color.GRAY);
 //                                 lv1.setVisibility(View.VISIBLE);
-                              if(!firstRate.equals("")){
-                                  calanderrate.setVisibility(View.VISIBLE);
-                                  calanderrate.setText(firstRate);
-                              }
+                                if (!firstRate.equals("")) {
+                                    calanderrate.setVisibility(View.VISIBLE);
+                                    calanderrate.setText(firstRate);
+                                }
 
-                                 if(eventsFirstLast.size() > 2){
-                                     maincell.setBackgroundResource(R.drawable.cellleftv1);
-                                     //maincell.setBackgroundResource(R.drawable.cellleft);
-                                 }
-                           }
+                                if (eventsFirstLast.size() > 2) {
+                                    maincell.setBackgroundResource(R.drawable.cellleftv1);
+                                    //maincell.setBackgroundResource(R.drawable.cellleft);
+                                }
+                            }
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
 
-                    try {
+                        try {
 
                             Calendar secondDateCal = Calendar.getInstance();
                             secondDateCal.setTime(secondDateView);
@@ -197,34 +203,39 @@ public class GridAdapter extends ArrayAdapter {
                             final int month = secondDateCal.get(Calendar.MONTH) + 1;
 
 
-                         if (day.equals(sDate) && month == displayMonth) {
-                             lv.setBackgroundResource(R.drawable.greencircle);
-                             cellNumber.setTextColor(Color.WHITE);
+                            if (day.equals(sDate) && month == displayMonth) {
+
+
+                                if (selectDate) {
+                                    lv.setBackgroundResource(R.drawable.darkcirlceboder);
+                                    cellNumber.setTextColor(Color.BLACK);
+                                }
 //                             lv2.setBackgroundColor(Color.GRAY);
 //                             lv2.setVisibility(View.VISIBLE);
-                             if(!secondRate.equals("")){
-                                 calanderrate.setVisibility(View.VISIBLE);
-                                 calanderrate.setText(secondRate);
+                                if (!secondRate.equals("")) {
+                                    calanderrate.setVisibility(View.VISIBLE);
+                                    calanderrate.setText(secondRate);
 
-                             }
+                                }
 
-                             if(eventsFirstLast.size() > 2){
-                                 maincell.setBackgroundResource(R.drawable.cellrightv1);
-                             }
-                          }
+                                if (eventsFirstLast.size() > 2) {
+                                    maincell.setBackgroundResource(R.drawable.cellrightv1);
+                                }
+                            }
 
-                          } catch (Exception e) {
-                                e.printStackTrace();
-                          }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
 
-
-                    if(eventsFirstLast.size() > 2){
-                        callrecycler(null,null,eventsFirstLast,lv,cellNumber,dayValue,null,sDate,displayMonth,maincell,calanderrate);
+                        if (countValueStatus) {
+                            callrecycler(null, null, eventsFirstLast, lv, cellNumber, dayValue, null, sDate, displayMonth, maincell, calanderrate);
+                        }
                     }
-                  }
 
-
+                }else {
+                    cellNumber.setTextColor(ContextCompat.getColor(getContext(), R.color.lightgrey));
+                }
             } else {
                 cellNumber.setTextColor(ContextCompat.getColor(getContext(), R.color.lightgrey));
 
@@ -297,6 +308,7 @@ public class GridAdapter extends ArrayAdapter {
         return view;
     }
     public void update(ArrayList<EventObjects> list, String firstdate, String seconddate, ArrayList arrayList) {
+        countValueStatus = false;
 
         eventsFirstLast = list;
         if(eventsFirstLast.size() > 0){
@@ -305,6 +317,7 @@ public class GridAdapter extends ArrayAdapter {
         firstDateView = eventsFirstLast.get(0).getDate();
         secondDateView = eventsFirstLast.get(eventsFirstLast.size() - 1).getDate();}
         if(eventsFirstLast.size() > 2){
+            countValueStatus = true;
             eventsFirstLast.remove(0); // removes the first item
             eventsFirstLast.remove(eventsFirstLast.size() - 1);
         }
@@ -322,7 +335,7 @@ public class GridAdapter extends ArrayAdapter {
             //   if(day.equals(date)){
                 if (day.equals(date) && displayMonthv1 == displayMonth) {
                    // eventIndicator.setVisibility(View.VISIBLE);
-                         maincell.setBackgroundColor(Color.GRAY);
+                         maincell.setBackgroundColor(Color.parseColor("#E6E6E6"));
                         if(!eventsFirstLast.get(k).getMessage().equals("")){
                         calanderrate.setVisibility(View.VISIBLE);
                         calanderrate.setText(eventsFirstLast.get(k).getMessage());

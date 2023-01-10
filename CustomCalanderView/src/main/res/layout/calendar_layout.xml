@@ -61,7 +61,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/lightgrey"
         android:paddingBottom="4dp"
         android:paddingTop="4dp"
         android:orientation="horizontal">
@@ -70,10 +69,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textSize="12sp"
             android:textColor="@color/colourBlack"
-            android:text="S"
+            android:text="Sun"
+            android:textStyle="normal"
             android:layout_marginTop="4dp"
-            android:textStyle="bold"
+            android:layout_marginBottom="4dp"
             android:layout_weight="1"/>
         <TextView
             android:id="@+id/mon"
@@ -81,9 +82,10 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/colourBlack"
-            android:text="M"
+            android:text="Mon"
+            android:textSize="12sp"
+
             android:layout_marginTop="4dp"
-            android:textStyle="bold"
             android:layout_weight="1"/>
         <TextView
             android:id="@+id/tue"
@@ -91,9 +93,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/colourBlack"
-            android:text="T"
+            android:text="Tue"
+            android:textSize="12sp"
             android:layout_marginTop="4dp"
-            android:textStyle="bold"
             android:layout_weight="1"/>
         <TextView
             android:id="@+id/wed"
@@ -101,9 +103,10 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/colourBlack"
-            android:text="W"
+            android:text="Wed"
+            android:textSize="12sp"
+
             android:layout_marginTop="4dp"
-            android:textStyle="bold"
             android:layout_weight="1"/>
         <TextView
             android:id="@+id/thu"
@@ -111,9 +114,10 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/colourBlack"
-            android:text="T"
+            android:text="Thu"
             android:layout_marginTop="4dp"
-            android:textStyle="bold"
+            android:textSize="12sp"
+
             android:layout_weight="1"/>
         <TextView
             android:id="@+id/fri"
@@ -121,9 +125,10 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/colourBlack"
-            android:text="F"
+            android:text="Fri"
             android:layout_marginTop="4dp"
-            android:textStyle="bold"
+            android:textSize="12sp"
+
             android:layout_weight="1"/>
         <TextView
             android:id="@+id/sat"
@@ -131,9 +136,10 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/colourBlack"
-            android:text="S"
+            android:text="Sat"
             android:layout_marginTop="4dp"
-            android:textStyle="bold"
+            android:textSize="12sp"
+
             android:layout_weight="1"/>
     </LinearLayout>
     <GridView

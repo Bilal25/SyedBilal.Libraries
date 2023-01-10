@@ -34,7 +34,7 @@ public class CalendarCustomView extends LinearLayout {
     private GridView calendarGridView;
     public static String dateset;
     private Button addEventButton;
-    private boolean callservices = false;
+    public static boolean selectDate = false;
     public static ArrayList<EventObjects> allEvents=new ArrayList<>();
     //testcommit
     //  var allEvents = java.util.ArrayList<EventObjects>()
@@ -46,6 +46,7 @@ public class CalendarCustomView extends LinearLayout {
     private SimpleDateFormat formatter = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
     private Context context;
+    private  CalanderIItemClicked itemClicked;
 
     private ArrayList<String> listDaysRate = new ArrayList();
 
@@ -64,9 +65,9 @@ public class CalendarCustomView extends LinearLayout {
         setUpCalendarAdapter();
         setPreviousButtonClickEvent();
         setNextButtonClickEvent();
-        setGridCellClickEvents(listDaysRate);
+        setGridCellClickEvents(listDaysRate,itemClicked);
         setallevent(allEvents);
-        openRangePicker("","");
+        openRangePicker("","", false);
 
         Log.d(TAG, "I need to call this method");
     }
@@ -74,9 +75,9 @@ public class CalendarCustomView extends LinearLayout {
     public void setallevent(ArrayList<EventObjects> list) {
 
         this.allEvents = list;
-        if(mAdapter != null)
+        if(mAdapter != null){
             mAdapter.update(allEvents,firstDate,seconDate,list);
-        mAdapter.notifyDataSetChanged();
+           mAdapter.notifyDataSetChanged();}
     }
 
     public CalendarCustomView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -97,7 +98,7 @@ public class CalendarCustomView extends LinearLayout {
         previousButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                callservices = true;
+
                 cal.add(Calendar.MONTH, -1);
                 setUpCalendarAdapter();
 
@@ -109,14 +110,13 @@ public class CalendarCustomView extends LinearLayout {
         nextButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                callservices = true;
                 cal.add(Calendar.MONTH, 1);
                 setUpCalendarAdapter();
             }
         });
     }
 
-    public void setGridCellClickEvents(ArrayList<String> listDaysRateV1){
+    public void setGridCellClickEvents(ArrayList<String> listDaysRateV1, CalanderIItemClicked itemClicked){
         calendarGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -134,15 +134,17 @@ public class CalendarCustomView extends LinearLayout {
                 if(dateType) {
                     dateType =false;
                     seconDate = dates;
-                    openRangePicker(firstDate,seconDate);
-                }else {
+                    selectDate = true;
+                    openRangePicker(firstDate,seconDate,true);
+                    itemClicked.calanderIItemClicked(firstDate,seconDate,true);
+                } else {
                     allEvents.clear();
                     dateType = true;
                     firstDate = dates;
                     setallevent(allEvents);
-
-
-                    openRangePicker(firstDate,firstDate);
+                    selectDate =false;
+                    openRangePicker(firstDate,firstDate,false);
+                    itemClicked.calanderIItemClicked(firstDate,firstDate,false);
 
                 }
 
@@ -182,10 +184,13 @@ public class CalendarCustomView extends LinearLayout {
 ////                CalanderFragment.not_detail.callservices(dates);
 ////            }
 //        }
-        callservices = false;
         dateset = String.valueOf(sDate);
         mAdapter = new GridAdapter(context, dayValueInCells, cal, allEvents);
         calendarGridView.setAdapter(mAdapter);
+
+        if(allEvents.size() > 2){
+            mAdapter.update(allEvents,firstDate,seconDate,allEvents);
+        }
     }
 
     private String getDate(String date) {
@@ -202,7 +207,7 @@ public class CalendarCustomView extends LinearLayout {
     }
 
 
-    private void openRangePicker(String firstdate, String seconddate) {
+    private void openRangePicker(String firstdate, String seconddate, boolean b) {
         if(firstdate != "" && seconddate != "") {
             allEvents.clear();
             ArrayList dates = getDatediff(firstdate, seconddate);
