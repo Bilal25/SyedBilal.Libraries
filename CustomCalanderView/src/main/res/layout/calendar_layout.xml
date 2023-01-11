@@ -138,14 +138,13 @@
             android:text="Sat"
             android:layout_marginTop="4dp"
             android:textSize="12sp"
-
             android:layout_weight="1"/>
     </LinearLayout>
 
         <GridView
             android:id="@+id/calendar_grid"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="300dp"
             android:numColumns="7"/>
 
 
