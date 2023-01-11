@@ -289,48 +289,6 @@ public class CalendarCustomView extends LinearLayout {
     }
 
 
-    class SimpleGestureListener  extends GestureDetector.SimpleOnGestureListener {
-
-        @Override
-        public boolean onDown(MotionEvent event) {
-            Log.d("TAG","onDown: ");
-
-            // don't return false here or else none of the other
-            // gestures will work
-            return true;
-        }
-
-        @Override
-        public boolean onSingleTapConfirmed(MotionEvent e) {
-            Log.i("TAG", "onSingleTapConfirmed: ");
-            return true;
-        }
-
-        @Override
-        public void onLongPress(MotionEvent e) {
-            Log.i("TAG", "onLongPress: ");
-        }
-
-        @Override
-        public boolean onDoubleTap(MotionEvent e) {
-            Log.i("TAG", "onDoubleTap: ");
-            return true;
-        }
-
-        @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2,
-                                float distanceX, float distanceY) {
-            Log.i("TAG", "onScroll: ");
-            return true;
-        }
-
-        @Override
-        public boolean onFling(MotionEvent event1, MotionEvent event2,
-                               float velocityX, float velocityY) {
-            Log.d("TAG", "onFling: ");
-            return true;
-        }
-    }
 
 
     private class SwipeGestureDetector
@@ -368,16 +326,12 @@ public class CalendarCustomView extends LinearLayout {
         }
     }
     private void onLeftSwipe() {
-        Toast.makeText(context, "left!",
-                Toast.LENGTH_LONG).show();
         cal.add(Calendar.MONTH, 1);
-        setUpCalendarAdapter();
+           setUpCalendarAdapter();
     }
 
     private void onRightSwipe() {
-        Toast.makeText(context, "right!",
-                Toast.LENGTH_LONG).show();
         cal.add(Calendar.MONTH, -1);
-        setUpCalendarAdapter();
+           setUpCalendarAdapter();
     }
 }

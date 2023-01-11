@@ -59,14 +59,14 @@ public class GridAdapter extends ArrayAdapter  {
     private Date firstDateView;
     private Date secondDateView;
     int daa,ye,mnth;
-    private  CalanderIItemClickedV2 itemClicked;
 
-    public GridAdapter(Context context, List<Date> monthlyDates, Calendar currentDate, ArrayList<EventObjects> allEvent, CalanderIItemClickedV2 itemClickedv) {
+
+    public GridAdapter(Context context, List<Date> monthlyDates, Calendar currentDate, ArrayList<EventObjects> allEvent) {
         super(context, R.layout.single_cell_layout);
         this.monthlyDates = monthlyDates;
         this.currentDate = currentDate;
         this.allEventV1 = allEvent;
-        this.itemClicked = itemClickedv;
+
          mInflater = LayoutInflater.from(context);
          ///
 
@@ -245,48 +245,6 @@ public class GridAdapter extends ArrayAdapter  {
                 cellNumber.setTextColor(ContextCompat.getColor(getContext(), R.color.lightgrey));
 
             }
-
-
-
-
-
-
-
-
-
-
-
-            maincell.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    SimpleDateFormat formatterdate = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-                    Calendar cal1 = Calendar.getInstance();
-                    cal1.setTime(monthlyDates.get(position));
-                    String dates = formatterdate.format(cal1.getTime());
-                    if(dateTypev) {
-                        dateTypev =false;
-                        seconDate = dates;
-                        selectDate = true;
-                        itemClicked.calanderIItemClicked(firstDate,seconDate,true);
-
-
-                    } else {
-                        allEvents.clear();
-                        dateTypev = true;
-                        firstDate = dates;
-                        selectDate =false;
-                        itemClicked.calanderIItemClicked(firstDate,seconDate,false);
-
-
-
-                    }
-
-
-
-
-                }
-            });
 
             if(previousposition != 0)
             if(previousposition == position){
