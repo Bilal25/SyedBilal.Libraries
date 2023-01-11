@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.viewpager.widget.ViewPager;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,6 +33,7 @@ public class CalendarCustomView extends LinearLayout {
     private static final String TAG = CalendarCustomView.class.getSimpleName();
     private ImageView previousButton, nextButton;
     private TextView currentDate;
+    private ViewPager viewPager;
     private GridView calendarGridView;
     public static String dateset;
     private Button addEventButton;
@@ -42,6 +45,8 @@ public class CalendarCustomView extends LinearLayout {
     // ArrayList<jobdatasave> sy = new ArrayList<jobdatasave>();
     // private List<jobdatasave> jobarr;
     private static final int MAX_CALENDAR_COLUMN = 42;
+    private int viewPosition= 0;
+    private int viewPagerCount = 0;
     private int month, year;
     private SimpleDateFormat formatter = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
@@ -54,6 +59,8 @@ public class CalendarCustomView extends LinearLayout {
     private boolean dateType = false;
     private String firstDate,seconDate;
 
+    private CustomPagerAdapter customPagerAdapter;
+    private View view2;
     public CalendarCustomView(Context context) {
         super(context);
     }
@@ -62,9 +69,9 @@ public class CalendarCustomView extends LinearLayout {
         super(context, attrs);
         this.context = context;
         initializeUILayout();
-        setUpCalendarAdapter();
+        setUpCalendarAdapter(0);
         setPreviousButtonClickEvent();
-        setNextButtonClickEvent();
+       // setNextButtonClickEvent();
         setGridCellClickEvents(listDaysRate,itemClicked);
         setallevent(allEvents);
         openRangePicker("","", false);
@@ -75,15 +82,50 @@ public class CalendarCustomView extends LinearLayout {
     public void setallevent(ArrayList<EventObjects> list) {
 
         this.allEvents = list;
-        if(mAdapter != null){
-            mAdapter.update(allEvents,firstDate,seconDate,list);
-           mAdapter.notifyDataSetChanged();}
+//        if(mAdapter != null){
+//            mAdapter.update(allEvents,firstDate,seconDate,list);
+//           mAdapter.notifyDataSetChanged();}
+
+
+        if(customPagerAdapter != null){
+            customPagerAdapter.update(allEvents,firstDate,seconDate,list,viewPosition,mAdapter);
+            customPagerAdapter.notifyDataSetChanged();}
+
+
     }
 
     public CalendarCustomView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
+    private CalanderIItemClickedV2 itemClickedV2 = new CalanderIItemClickedV2 () {
+        @Override
+        public void calanderIItemClicked(String firstDate, String secondDate, boolean b) {
+            Log.d(TAG, "calanderIItemClicked: ");
+            view2 = viewPager.getChildAt(viewPager.getCurrentItem()).getRootView();
+            viewPagerCount = viewPager.getCurrentItem();
+            GridView gridview = (GridView) view2.findViewById(R.id.calendar_grid);
+            mAdapter = (GridAdapter) gridview.getAdapter();
 
+
+
+            if(b) {
+                dateType =false;
+                seconDate = secondDate;
+                selectDate = true;
+                openRangePicker(firstDate,seconDate,true);
+               // itemClicked.calanderIItemClicked(firstDate,seconDate,true);
+            } else {
+                allEvents.clear();
+                dateType = true;
+                firstDate = firstDate;
+                setallevent(allEvents);
+                selectDate =false;
+                openRangePicker(firstDate,firstDate,false);
+             //   itemClicked.calanderIItemClicked(firstDate,firstDate,false);
+
+            }
+        }
+    };
     private void initializeUILayout(){
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.calendar_layout, this);
@@ -92,15 +134,74 @@ public class CalendarCustomView extends LinearLayout {
         currentDate = (TextView)view.findViewById(R.id.display_current_date);
         addEventButton = (Button)view.findViewById(R.id.add_calendar_event);
         calendarGridView = (GridView)view.findViewById(R.id.calendar_grid);
+        viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+       // viewPager.setPageTransformer(false, new CarouselMembership(context));
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                if(position==0) {
+                    Log.d(TAG, "onPageSelected: "+position);
+                }else  {
+                    Log.d(TAG, "onPageSelected: "+position);
+                }
+                if(position < viewPager.getAdapter().getCount()-1 ) {
+                    Log.d(TAG, "onPageSelected: "+position);
+                }else  {
+                    Log.d(TAG, "onPageSelected: "+position);
+                }
+
+                viewPosition = position;
+                viewPagerCount = viewPager.getCurrentItem();
+                cal.add(Calendar.MONTH, 1);
+                setUpCalendarAdapter(position);
+                Log.d(TAG, "onPageSelected: "+position);
+                //setNextButtonClickEvent();
+                // Page changed
+            }
+        });
+
+
+
+
+
+//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//
+//
+//
+//                viewPosition = position;
+//                viewPagerCount = viewPager.getCurrentItem();
+//                cal.add(Calendar.MONTH, 1);
+//                setUpCalendarAdapter(position);
+//                Log.d(TAG, "onPageSelected: "+position);
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//
+//            }
+//        });
+
+     //   viewPager.setClipChildren(false);
+     //   viewPager.setOffscreenPageLimit(12);
+     //   viewPager.setPageTransformer(false, new CarouselMembership(context));
     }
 
     private void setPreviousButtonClickEvent(){
         previousButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                viewPagerCount = viewPager.getCurrentItem();
                 cal.add(Calendar.MONTH, -1);
-                setUpCalendarAdapter();
+                setUpCalendarAdapter(viewPosition);
 
             }
         });
@@ -111,7 +212,7 @@ public class CalendarCustomView extends LinearLayout {
             @Override
             public void onClick(View v) {
                 cal.add(Calendar.MONTH, 1);
-                setUpCalendarAdapter();
+              //  setUpCalendarAdapter(position);
             }
         });
     }
@@ -156,7 +257,7 @@ public class CalendarCustomView extends LinearLayout {
         });
     }
 
-    public void setUpCalendarAdapter(){
+    public void setUpCalendarAdapter(int position){
         dayValueInCells = new ArrayList<Date>();
         Calendar mCal = (Calendar)cal.clone();
         mCal.set(Calendar.DAY_OF_MONTH, 1);
@@ -184,12 +285,24 @@ public class CalendarCustomView extends LinearLayout {
 ////                CalanderFragment.not_detail.callservices(dates);
 ////            }
 //        }
+
+
+
         dateset = String.valueOf(sDate);
-        mAdapter = new GridAdapter(context, dayValueInCells, cal, allEvents);
-        calendarGridView.setAdapter(mAdapter);
+        customPagerAdapter = new CustomPagerAdapter(context, dayValueInCells, cal, allEvents,sDate,itemClickedV2,view2);
+        //  calendarGridView.setAdapter(mAdapter);
+        viewPager.setAdapter(customPagerAdapter);
+
 
         if(allEvents.size() > 2){
-            mAdapter.update(allEvents,firstDate,seconDate,allEvents);
+            if(customPagerAdapter != null){
+                view2 = viewPager.getChildAt(viewPager.getCurrentItem()).getRootView();
+                viewPagerCount = viewPager.getCurrentItem();
+                GridView gridview = (GridView) view2.findViewById(R.id.calendar_grid);
+                mAdapter = (GridAdapter) gridview.getAdapter();
+                customPagerAdapter.update(allEvents,firstDate,seconDate,null,viewPosition,mAdapter);
+                customPagerAdapter.notifyDataSetChanged();}
+           // mAdapter.update(allEvents,firstDate,seconDate,allEvents);
         }
     }
 

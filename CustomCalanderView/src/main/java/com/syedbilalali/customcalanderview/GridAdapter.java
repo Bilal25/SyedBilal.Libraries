@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class GridAdapter extends ArrayAdapter {
+public class GridAdapter extends ArrayAdapter  {
     private static final String TAG = GridAdapter.class.getSimpleName();
     private LayoutInflater mInflater;
     public static List<Date> monthlyDates;
@@ -44,12 +44,14 @@ public class GridAdapter extends ArrayAdapter {
     public static int finallist;
     public static boolean nm;
     int das;
+    public static boolean dateTypev = false;
     private int previousposition= 0;
+    public static String firstDate,seconDate;
+
     String updatemonth,updateyear,currentda;
     String sDate;
     String checkdate;
     private  boolean countValueStatus = false;
-
     private String firstRate;
     private String secondRate;
     private Date oneWayTripDate;
@@ -57,11 +59,14 @@ public class GridAdapter extends ArrayAdapter {
     private Date firstDateView;
     private Date secondDateView;
     int daa,ye,mnth;
-    public GridAdapter(Context context, List<Date> monthlyDates, Calendar currentDate, ArrayList<EventObjects> allEvent) {
+    private  CalanderIItemClickedV2 itemClicked;
+
+    public GridAdapter(Context context, List<Date> monthlyDates, Calendar currentDate, ArrayList<EventObjects> allEvent, CalanderIItemClickedV2 itemClickedv) {
         super(context, R.layout.single_cell_layout);
         this.monthlyDates = monthlyDates;
         this.currentDate = currentDate;
         this.allEventV1 = allEvent;
+        this.itemClicked = itemClickedv;
          mInflater = LayoutInflater.from(context);
          ///
 
@@ -140,8 +145,8 @@ public class GridAdapter extends ArrayAdapter {
             cellNumber.setText(String.valueOf(dayValue));
 
               lv = (RelativeLayout)view.findViewById(R.id.event_wrapper);
-//              lv1 = (LinearLayout)view.findViewById(R.id.event_backgroundv1);
-//              lv2 = (LinearLayout)view.findViewById(R.id.event_backgroundv2);
+//            lv1 = (LinearLayout)view.findViewById(R.id.event_backgroundv1);
+//            lv2 = (LinearLayout)view.findViewById(R.id.event_backgroundv2);
               maincell = (LinearLayout)view.findViewById(R.id.lir);
 
 //            lv1.setVisibility(View.GONE);
@@ -251,30 +256,37 @@ public class GridAdapter extends ArrayAdapter {
 
 
 
-//            cellNumber.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//
-//                        previousposition = position;
-//                        notifyDataSetChanged();
-//                        eventIndicatorday.setVisibility(View.VISIBLE);
-//                        eventIndicatorday.setBackgroundColor(getContext().getResources().getColor(R.color.green_color));
-//                       // cellNumber.setBackgroundResource(R.drawable.greencircle);
-//
-//                        Date mDate = monthlyDates.get(position);
-//                        Log.i(TAG, "onItemClick: "+mDate.getTime());
-//                        String d = String.valueOf(mDate.getTime());
-//                        String dates = getDate(d);
-//                        Toast.makeText(getContext(), "Clicked " + dates, Toast.LENGTH_LONG).show();
-//
-//                        allEvents.clear();
-////                        if(CalanderFragment.not_detail != null){
-////                            CalanderFragment.not_detail.calldata(dates);
-////                        }
-//                    //mAdapter.setview(position);
-//
-//                }
-//            });
+            maincell.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    SimpleDateFormat formatterdate = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                    Calendar cal1 = Calendar.getInstance();
+                    cal1.setTime(monthlyDates.get(position));
+                    String dates = formatterdate.format(cal1.getTime());
+                    if(dateTypev) {
+                        dateTypev =false;
+                        seconDate = dates;
+                        selectDate = true;
+                        itemClicked.calanderIItemClicked(firstDate,seconDate,true);
+
+
+                    } else {
+                        allEvents.clear();
+                        dateTypev = true;
+                        firstDate = dates;
+                        selectDate =false;
+                        itemClicked.calanderIItemClicked(firstDate,seconDate,false);
+
+
+
+                    }
+
+
+
+
+                }
+            });
 
             if(previousposition != 0)
             if(previousposition == position){
@@ -309,7 +321,6 @@ public class GridAdapter extends ArrayAdapter {
     }
     public void update(ArrayList<EventObjects> list, String firstdate, String seconddate, ArrayList arrayList) {
         countValueStatus = false;
-
         eventsFirstLast = list;
         if(eventsFirstLast.size() > 0){
         this.firstRate = eventsFirstLast.get(0).getMessage();
