@@ -154,6 +154,7 @@ public class GridAdapter extends ArrayAdapter  {
             lv.setBackgroundResource(0);
             maincell.setBackgroundResource(0);
             cellNumber.setTextColor(Color.BLACK);
+            calanderrate.setTextColor(Color.BLACK);
             maincell.setBackgroundColor(Color.WHITE);
             calanderrate.setVisibility(View.GONE);
 //            lv1.setBackgroundColor(Color.WHITE);
@@ -187,6 +188,7 @@ public class GridAdapter extends ArrayAdapter  {
                                 if (!firstRate.equals("")) {
                                     calanderrate.setVisibility(View.VISIBLE);
                                     calanderrate.setText(firstRate);
+                                    calanderrate.setTextColor(Color.WHITE);
                                 }
 
                                 if (eventsFirstLast.size() > 2) {
