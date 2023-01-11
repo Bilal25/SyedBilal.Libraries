@@ -229,7 +229,6 @@ public class GridAdapter extends ArrayAdapter  {
                                 }
                                 if (selectDate) {
                                     maincell.setBackgroundResource(R.drawable.cellrightv1);
-
                                 }
 //                                if (eventsFirstLast.size() > 2) {
 //                                    maincell.setBackgroundResource(R.drawable.cellrightv1);
