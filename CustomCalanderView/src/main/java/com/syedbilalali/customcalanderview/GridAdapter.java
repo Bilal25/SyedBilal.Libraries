@@ -191,10 +191,13 @@ public class GridAdapter extends ArrayAdapter  {
                                     calanderrate.setTextColor(Color.WHITE);
                                 }
 
-                                if (eventsFirstLast.size() > 2) {
+                                if (selectDate) {
                                     maincell.setBackgroundResource(R.drawable.cellleftv1);
-                                    //maincell.setBackgroundResource(R.drawable.cellleft);
+
                                 }
+//                                    if (eventsFirstLast.size() > 2) {
+//                                    //maincell.setBackgroundResource(R.drawable.cellleft);
+//                                }
                             }
 
                         } catch (Exception e) {
@@ -224,10 +227,13 @@ public class GridAdapter extends ArrayAdapter  {
                                     calanderrate.setText(secondRate);
 
                                 }
-
-                                if (eventsFirstLast.size() > 2) {
+                                if (selectDate) {
                                     maincell.setBackgroundResource(R.drawable.cellrightv1);
+
                                 }
+//                                if (eventsFirstLast.size() > 2) {
+//                                    maincell.setBackgroundResource(R.drawable.cellrightv1);
+//                                }
                             }
 
                         } catch (Exception e) {
