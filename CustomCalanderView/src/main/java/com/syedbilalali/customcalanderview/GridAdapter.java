@@ -288,6 +288,7 @@ public class GridAdapter extends ArrayAdapter  {
         countValueStatus = false;
         eventsFirstLast.clear();
         eventsFirstLast.addAll(list);
+
         if(eventsFirstLast.size() > 0){
         this.firstRate = eventsFirstLast.get(0).getMessage();
         this.secondRate =  eventsFirstLast.get(eventsFirstLast.size() - 1).getMessage();
