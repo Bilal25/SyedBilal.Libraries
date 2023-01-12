@@ -2,8 +2,8 @@ package com.syedbilalali.customcalanderview;
 
 
 
-import static com.syedbilalali.customcalanderview.CalendarCustomView.allEvents;
 import static com.syedbilalali.customcalanderview.CalendarCustomView.selectDate;
+import static com.syedbilalali.customcalanderview.CalendarCustomView.selectDateValue;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -286,17 +286,18 @@ public class GridAdapter extends ArrayAdapter  {
     }
     public void update(ArrayList<EventObjects> list, String firstdate, String seconddate, ArrayList arrayList) {
         countValueStatus = false;
-        eventsFirstLast = list;
+        eventsFirstLast.clear();
+        eventsFirstLast.addAll(list);
         if(eventsFirstLast.size() > 0){
         this.firstRate = eventsFirstLast.get(0).getMessage();
         this.secondRate =  eventsFirstLast.get(eventsFirstLast.size() - 1).getMessage();
         firstDateView = eventsFirstLast.get(0).getDate();
         secondDateView = eventsFirstLast.get(eventsFirstLast.size() - 1).getDate();}
-        if(eventsFirstLast.size() > 2){
-            countValueStatus = true;
-            eventsFirstLast.remove(0); // removes the first item
-            eventsFirstLast.remove(eventsFirstLast.size() - 1);
-        }
+            if (eventsFirstLast.size() > 2) {
+                countValueStatus = true;
+                eventsFirstLast.remove(0); // removes the first item
+                eventsFirstLast.remove(eventsFirstLast.size() - 1);
+            }
 
         notifyDataSetChanged();
     }

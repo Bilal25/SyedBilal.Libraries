@@ -44,7 +44,9 @@ public class CalendarCustomView extends LinearLayout {
 
 
     public static boolean selectDate = false;
-    public static ArrayList<EventObjects> allEvents=new ArrayList<>();
+    public static boolean selectDateValue = false;
+    private ArrayList<EventObjects> allEvents = new ArrayList<>();
+    private  ArrayList<EventObjects> allEventsV2 = new ArrayList<>();
     //testcommit
     //  var allEvents = java.util.ArrayList<EventObjects>()
     List<Date> dayValueInCells = new ArrayList<Date>();
@@ -94,11 +96,11 @@ public class CalendarCustomView extends LinearLayout {
     }
 
     public void setallevent(ArrayList<EventObjects> list) {
-
-        this.allEvents = list;
+       // allEvents.addAll(list);
         if(mAdapter != null){
-            mAdapter.update(allEvents,firstDate,seconDate,list);
-           mAdapter.notifyDataSetChanged();}
+            mAdapter.update(list,firstDate,seconDate,list);
+             mAdapter.notifyDataSetChanged();
+        }
     }
 
     public CalendarCustomView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -169,6 +171,7 @@ public class CalendarCustomView extends LinearLayout {
                     dateType =false;
                     seconDate = dates;
                     selectDate = true;
+                    selectDateValue = true;
                     openRangePicker(firstDate,seconDate,true);
                     itemClicked.calanderIItemClicked(firstDate,seconDate,true);
                 } else {
@@ -211,9 +214,12 @@ public class CalendarCustomView extends LinearLayout {
         mAdapter = new GridAdapter(context, dayValueInCells, cal, allEvents);
         calendarGridView.setAdapter(mAdapter);
 
-        if(allEvents.size() > 2){
-            mAdapter.update(allEvents,firstDate,seconDate,allEvents);
-        }
+
+            if(allEvents.size() > 2){
+                mAdapter.update(allEvents,firstDate,seconDate,allEvents);
+            }
+
+
 
     }
 
@@ -234,9 +240,11 @@ public class CalendarCustomView extends LinearLayout {
     private void openRangePicker(String firstdate, String seconddate, boolean b) {
         if(firstdate != "" && seconddate != "") {
             allEvents.clear();
+            allEventsV2.clear();
             ArrayList dates = getDatediff(firstdate, seconddate);
             if (dates != null) {
-                setallevent(allEvents);
+                allEventsV2.addAll(dates);
+                setallevent(dates);
             }
         }
     }
@@ -326,11 +334,13 @@ public class CalendarCustomView extends LinearLayout {
         }
     }
     private void onLeftSwipe() {
+        selectDateValue = false;
         cal.add(Calendar.MONTH, 1);
            setUpCalendarAdapter();
     }
 
     private void onRightSwipe() {
+        selectDateValue = false;
         cal.add(Calendar.MONTH, -1);
            setUpCalendarAdapter();
     }
