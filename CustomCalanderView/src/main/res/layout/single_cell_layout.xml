@@ -9,43 +9,14 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:id="@+id/lir"
-        android:padding="3dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:layout_height="wrap_content">
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:id="@+id/event_backgroundv1"
-            android:layout_width="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_height="40dp"
-            android:background="@color/Date_Range"
-            android:visibility="gone"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/event_backgroundv2"
-            android:layout_width="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_height="match_parent"
-
-            android:background="@color/Date_Range"
-            android:padding="5dp"
-            android:visibility="gone"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/event_wrapper"
             android:layout_width="35dp"
-            android:background="@drawable/greencircle"
             android:layout_height="35dp"
             android:layout_gravity="center"
             android:orientation="vertical">
@@ -75,13 +46,12 @@
                 android:text="1000"
                 android:textColor="@color/colourBlack"
                 android:textSize="7sp"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
         </RelativeLayout>
 
 
 
-    </FrameLayout>
 
     </LinearLayout>
 
