@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_width="45dp"
+    android:layout_height="45dp"
+    android:layout_gravity="center_horizontal"
     android:orientation="vertical">
 
     <LinearLayout
@@ -43,8 +44,9 @@
 
         <RelativeLayout
             android:id="@+id/event_wrapper"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:background="@drawable/greencircle"
+            android:layout_height="35dp"
             android:layout_gravity="center"
             android:orientation="vertical">
 
@@ -70,9 +72,9 @@
                 android:layout_marginTop="-3dp"
 
                 android:gravity="center"
-                android:text="12"
+                android:text="1000"
                 android:textColor="@color/colourBlack"
-                android:textSize="8sp"
+                android:textSize="7sp"
                 android:visibility="visible" />
 
         </RelativeLayout>

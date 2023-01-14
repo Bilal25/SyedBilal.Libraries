@@ -165,9 +165,11 @@ public class GridAdapter extends ArrayAdapter  {
             Calendar cal = Calendar.getInstance();
             final int currentMonthcal = cal.get(Calendar.MONTH) + 1;
             final int currentdascal = cal.get(Calendar.DAY_OF_MONTH);
+            final int currentyearv1 = cal.get(Calendar.YEAR);
 
 
-            if (displayMonth == currentMonth && displayYear == currentYear) {
+
+            if (displayMonth == currentMonth && displayYear == currentyearv1) {
                 if (dayValue >= currentdascal || displayMonth > currentMonthcal) {
                     cellNumber.setTextColor(Color.BLACK);
                     if (eventsFirstLast.size() > 0) {

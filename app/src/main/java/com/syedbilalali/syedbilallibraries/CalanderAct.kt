@@ -2,6 +2,7 @@ package com.syedbilalali.syedbilallibraries
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.syedbilalali.customcalanderview.CalanderIItemClicked
 import com.syedbilalali.customcalanderview.CalendarCustomView
@@ -18,18 +19,20 @@ class CalanderAct : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_calander)
         mView = findViewById(R.id.custom_calendar_view) as CalendarCustomView
-//        var btn  = findViewById(R.id.btnview) as Button
-//        btn.setOnClickListener {
-//            //openRangePicker("15/01/2023","23/02/2023")
-//        }
+        var btn  = findViewById(R.id.btn) as Button
+        btn.setOnClickListener {
+            listDaysRate.add("2000")
+            listDaysRate.add("3000")
+            listDaysRate.add("4000")
+            listDaysRate.add("5000")
+            listDaysRate.add("60")
+            listDaysRate.add("70")
+            listDaysRate.add("800")
+            mView!!.setArrayDataValue(listDaysRate)
+            //openRangePicker("15/01/2023","23/02/2023")
+        }
 
-        listDaysRate.add("20")
-        listDaysRate.add("30")
-        listDaysRate.add("40")
-        listDaysRate.add("50")
-        listDaysRate.add("60")
-        listDaysRate.add("70")
-        listDaysRate.add("80")
+
         mView!!.setGridCellClickEvents(listDaysRate, itemClicked);
 
 

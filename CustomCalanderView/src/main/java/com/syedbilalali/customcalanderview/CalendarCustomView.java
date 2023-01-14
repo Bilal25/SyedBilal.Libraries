@@ -89,10 +89,18 @@ public class CalendarCustomView extends LinearLayout {
         setPreviousButtonClickEvent();
         setNextButtonClickEvent();
         setGridCellClickEvents(listDaysRate,itemClicked);
+        setArrayDataValue(listDaysRate);
         setallevent(allEvents);
         openRangePicker("","", false);
 
         Log.d(TAG, "I need to call this method");
+    }
+
+    public void setArrayDataValue(ArrayList<String> listDaysRatev1) {
+       if(listDaysRate != null){
+           listDaysRate.clear();
+       }
+        listDaysRate.addAll(listDaysRatev1);
     }
 
     public void setallevent(ArrayList<EventObjects> list) {
@@ -156,13 +164,14 @@ public class CalendarCustomView extends LinearLayout {
         calendarGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                listDaysRate = listDaysRateV1;
+               // listDaysRate = listDaysRateV1;
 
                 // String current = displayYear+"-"+"0"+currentMonth+"-"+dateno;
 //                Date mDate = monthlyDates.get(position);
 //                Log.i(TAG, "onItemClick: "+mDate.getTime());
 //                String d = String.valueOf(mDate.getTime());
 //                String dates = getDate(d);
+
                 SimpleDateFormat formatterdate = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
                 Calendar cal1 = Calendar.getInstance();
                 cal1.setTime(dayValueInCells.get(position));
@@ -175,6 +184,8 @@ public class CalendarCustomView extends LinearLayout {
                     openRangePicker(firstDate,seconDate,true);
                     itemClicked.calanderIItemClicked(firstDate,seconDate,true);
                 } else {
+                    if(listDaysRate != null)
+                        listDaysRate.clear();
                     allEvents.clear();
                     dateType = true;
                     firstDate = dates;
@@ -283,7 +294,7 @@ public class CalendarCustomView extends LinearLayout {
 
             }
 
-             if(allEvents.size() > 6)
+             if(allEvents.size() > 2)
              for (int k = 0; k < listDaysRate.size(); k++) {
                  jdb = new EventObjects(allEvents.get(k).id, listDaysRate.get(k), allEvents.get(k).getDate());
                  allEvents.set(k,jdb);
@@ -291,7 +302,7 @@ public class CalendarCustomView extends LinearLayout {
 
                 return allEvents;
         } catch (Exception ignored) {
-            return null;
+            return allEvents;
         }
 
     }
