@@ -89,18 +89,19 @@ public class CalendarCustomView extends LinearLayout {
         setPreviousButtonClickEvent();
         setNextButtonClickEvent();
         setGridCellClickEvents(listDaysRate,itemClicked);
-        setArrayDataValue(listDaysRate);
+        setArrayDataValue(listDaysRate,"","");
         setallevent(allEvents);
         openRangePicker("","", false);
 
         Log.d(TAG, "I need to call this method");
     }
 
-    public void setArrayDataValue(ArrayList<String> listDaysRatev1) {
+    public void setArrayDataValue(ArrayList<String> listDaysRatev1,String firstdate, String seconddate) {
        if(listDaysRate != null){
            listDaysRate.clear();
        }
         listDaysRate.addAll(listDaysRatev1);
+        openRangePicker(firstdate,seconddate,true);
     }
 
     public void setallevent(ArrayList<EventObjects> list) {
@@ -183,7 +184,7 @@ public class CalendarCustomView extends LinearLayout {
                     seconDate = dates;
                     selectDate = true;
                     selectDateValue = true;
-                    openRangePicker(firstDate,seconDate,true);
+                  //  openRangePicker(firstDate,seconDate,true);
                     itemClicked.calanderIItemClicked(firstDate,seconDate,true);
                 } else {
                     if(listDaysRate != null)
