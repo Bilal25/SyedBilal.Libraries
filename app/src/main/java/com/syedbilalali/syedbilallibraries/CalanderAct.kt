@@ -7,14 +7,16 @@ import androidx.appcompat.app.AppCompatActivity
 import com.syedbilalali.customcalanderview.CalanderIItemClicked
 import com.syedbilalali.customcalanderview.CalendarCustomView
 import com.syedbilalali.customcalanderview.EventObjects
+import com.syedbilalali.customcalanderview.EventObjectsTime
 
 import java.util.*
 
 
 class CalanderAct : AppCompatActivity() {
     var allEvents = java.util.ArrayList<EventObjects>()
-    private val listDaysRate: ArrayList<String?> = ArrayList<String?>()
     var mView: CalendarCustomView? = null
+    private val listDaysRate: ArrayList<EventObjectsTime?> = ArrayList<EventObjectsTime?>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_calander)
@@ -56,13 +58,16 @@ class CalanderAct : AppCompatActivity() {
             override fun calanderIItemClicked(firstDate: String?, secondDate: String?, b: Boolean) {
                 Log.d("TAG", "calanderIItemClicked: "+firstDate +secondDate + b)
                 if(b){
-                    listDaysRate.add("2000")
-                    listDaysRate.add("3000")
-                    listDaysRate.add("4000")
-                    listDaysRate.add("5000")
-                    listDaysRate.add("60")
-                    listDaysRate.add("70")
-                    listDaysRate.add("800")
+                    var dayName = EventObjectsTime()
+                    dayName.dayname = "Saturday"
+                    dayName.rates = "1452"
+                    listDaysRate.add(dayName)
+
+                    var dayName1 = EventObjectsTime()
+                    dayName1.dayname = "Wednesday"
+                    dayName1.rates = "1466"
+                    listDaysRate.add(dayName1)
+
                     mView!!.setArrayDataValue(listDaysRate,firstDate,secondDate)
 
                 }
