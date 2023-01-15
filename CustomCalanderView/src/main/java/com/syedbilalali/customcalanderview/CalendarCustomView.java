@@ -101,6 +101,12 @@ public class CalendarCustomView extends LinearLayout {
            listDaysRate.clear();
        }
         listDaysRate.addAll(listDaysRatev1);
+        dateType =false;
+        seconDate = seconddate;
+        selectDate = true;
+        selectDateValue = true;
+        //  openRangePicker(firstDate,seconDate,true);
+
         openRangePicker(firstdate,seconddate,true);
     }
 
@@ -180,11 +186,11 @@ public class CalendarCustomView extends LinearLayout {
                 cal1.setTime(dayValueInCells.get(position));
                 String dates = formatterdate.format(cal1.getTime());
                 if(dateType) {
-                    dateType =false;
+//                    dateType =false;
                     seconDate = dates;
-                    selectDate = true;
-                    selectDateValue = true;
-                  //  openRangePicker(firstDate,seconDate,true);
+//                    selectDate = true;
+//                    selectDateValue = true;
+//                  //  openRangePicker(firstDate,seconDate,true);
                     itemClicked.calanderIItemClicked(firstDate,seconDate,true);
                 } else {
                     if(listDaysRate != null)

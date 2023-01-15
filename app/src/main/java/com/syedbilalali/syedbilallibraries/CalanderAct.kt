@@ -21,14 +21,7 @@ class CalanderAct : AppCompatActivity() {
         mView = findViewById(R.id.custom_calendar_view) as CalendarCustomView
         var btn  = findViewById(R.id.btn) as Button
         btn.setOnClickListener {
-            listDaysRate.add("2000")
-            listDaysRate.add("3000")
-            listDaysRate.add("4000")
-            listDaysRate.add("5000")
-            listDaysRate.add("60")
-            listDaysRate.add("70")
-            listDaysRate.add("800")
-            mView!!.setArrayDataValue(listDaysRate)
+
             //openRangePicker("15/01/2023","23/02/2023")
         }
 
@@ -62,6 +55,18 @@ class CalanderAct : AppCompatActivity() {
         object : CalanderIItemClicked {
             override fun calanderIItemClicked(firstDate: String?, secondDate: String?, b: Boolean) {
                 Log.d("TAG", "calanderIItemClicked: "+firstDate +secondDate + b)
+                if(b){
+                    listDaysRate.add("2000")
+                    listDaysRate.add("3000")
+                    listDaysRate.add("4000")
+                    listDaysRate.add("5000")
+                    listDaysRate.add("60")
+                    listDaysRate.add("70")
+                    listDaysRate.add("800")
+                    mView!!.setArrayDataValue(listDaysRate,firstDate,secondDate)
+
+                }
+
             }
 
 

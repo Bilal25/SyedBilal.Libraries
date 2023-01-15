@@ -154,7 +154,7 @@ public class GridAdapter extends ArrayAdapter  {
             lv.setBackgroundResource(0);
             maincell.setBackgroundResource(0);
             cellNumber.setTextColor(Color.BLACK);
-            calanderrate.setTextColor(Color.BLACK);
+            calanderrate.setTextColor(ContextCompat.getColor(getContext(), R.color.colorfeedtextdes));
             maincell.setBackgroundColor(Color.WHITE);
             calanderrate.setVisibility(View.GONE);
 //            lv1.setBackgroundColor(Color.WHITE);
@@ -171,7 +171,14 @@ public class GridAdapter extends ArrayAdapter  {
 
             if (displayMonth == currentMonth && displayYear == currentyearv1) {
                 if (dayValue >= currentdascal || displayMonth > currentMonthcal) {
-                    cellNumber.setTextColor(Color.BLACK);
+                    if(dayValue == currentdascal && displayMonth == currentMonthcal && displayYear == currentyearv1){
+                        cellNumber.setTextColor(ContextCompat.getColor(getContext(), R.color.colorOrange));
+
+                    }else {
+                        cellNumber.setTextColor(Color.BLACK);
+
+                    }
+
                     if (eventsFirstLast.size() > 0) {
                         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                         Date netDate = null;

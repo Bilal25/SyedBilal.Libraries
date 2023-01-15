@@ -42,12 +42,12 @@
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="-3dp"
-
                 android:gravity="center"
                 android:text="1000"
-                android:textColor="@color/colourBlack"
+                android:textStyle="bold"
+                android:textColor="@color/lightgrey"
                 android:textSize="7sp"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
         </RelativeLayout>
 
