@@ -8,6 +8,7 @@ import com.syedbilalali.customcalanderview.CalanderIItemClicked
 import com.syedbilalali.customcalanderview.CalendarCustomView
 import com.syedbilalali.customcalanderview.EventObjects
 import com.syedbilalali.customcalanderview.EventObjectsTime
+import java.text.SimpleDateFormat
 
 import java.util.*
 
@@ -26,6 +27,7 @@ class CalanderAct : AppCompatActivity() {
 
             //openRangePicker("15/01/2023","23/02/2023")
         }
+
 
 
         mView!!.setGridCellClickEvents(listDaysRate, itemClicked);
@@ -58,14 +60,27 @@ class CalanderAct : AppCompatActivity() {
             override fun calanderIItemClicked(firstDate: String?, secondDate: String?, b: Boolean) {
                 Log.d("TAG", "calanderIItemClicked: "+firstDate +secondDate + b)
                 if(b){
+                    val startDate = Calendar.getInstance()
+                    val formatterdate = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+                    startDate.time = formatterdate.parse("24/01/2023")
+
+                    val endDate = Calendar.getInstance()
+                    val formatterdatev1 = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+                    endDate.time = formatterdatev1.parse("22/01/2023")
+
+
                     var dayName = EventObjectsTime()
                     dayName.dayname = "Saturday"
                     dayName.rates = "1452"
+                    dayName.date = startDate.time
+
                     listDaysRate.add(dayName)
 
                     var dayName1 = EventObjectsTime()
                     dayName1.dayname = "Wednesday"
                     dayName1.rates = "1466"
+                    dayName1.date = endDate.time
+
                     listDaysRate.add(dayName1)
 
                     mView!!.setArrayDataValue(listDaysRate,firstDate,secondDate)

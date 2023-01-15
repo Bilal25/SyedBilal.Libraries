@@ -272,6 +272,8 @@ public class CalendarCustomView extends LinearLayout {
     private ArrayList getDatediff (String dateString1, String dateString2){
 
         try {
+            int index = 0;
+
             allEvents.clear();
             ArrayList<Date> dates = new ArrayList<Date>();
             EventObjects jdb = null;
@@ -293,6 +295,7 @@ public class CalendarCustomView extends LinearLayout {
             cal2.setTime(date2);
 
             while (!cal1.after(cal2)) {
+                index++;
                 dates.add(cal1.getTime());
                 int dayOfWeek = cal1.get(Calendar.DAY_OF_WEEK);
                // String[] days = new String[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thrusday", "Friday", "Saturday" };
@@ -304,9 +307,9 @@ public class CalendarCustomView extends LinearLayout {
                 allEvents.add(jdb);
 
                 for (int k = 0; k < listDaysRate.size(); k++) {
-                    if(listDaysRate.get(k).getDate().equals(cal1.getTime())) {
-                        jdb = new EventObjects(allEvents.get(k).id, listDaysRate.get(k).getRates(), allEvents.get(k).getDate());
-                        allEvents.set(k, jdb);
+                    if(listDaysRate.get(k).getDate().equals(allEvents.get(index-1).getDate())) {
+                        jdb = new EventObjects(allEvents.get(index-1).id, listDaysRate.get(k).getRates(), allEvents.get(index-1).getDate());
+                        allEvents.set(index-1, jdb);
                         break;
                     }
                 }
