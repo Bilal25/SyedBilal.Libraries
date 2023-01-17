@@ -42,7 +42,8 @@ public class CalendarCustomView extends LinearLayout {
     private LinearLayout linearLayout;
 
 
-
+    private Calendar cal_first = Calendar.getInstance();
+    private Calendar cal_second = Calendar.getInstance();
     public static boolean selectDate = false;
     public static boolean selectDateValue = false;
     private ArrayList<EventObjects> allEvents = new ArrayList<>();
@@ -101,7 +102,6 @@ public class CalendarCustomView extends LinearLayout {
         if(listDaysRate != null)
             listDaysRate.clear();
         allEvents.clear();
-        dateType = true;
         setallevent(allEvents);
         selectDate =false;
         openRangePicker("","",false);
@@ -192,33 +192,44 @@ public class CalendarCustomView extends LinearLayout {
 //                String dates = getDate(d);
 
                 SimpleDateFormat formatterdate = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-                Calendar cal1 = Calendar.getInstance();
+                 Calendar cal1 = Calendar.getInstance();
                 cal1.setTime(dayValueInCells.get(position));
                 String dates = formatterdate.format(cal1.getTime());
-                if(firstDate.equals(seconDate)){
-                    dateType =false;
-                }
-                if(dateType) {
+                  String currentdate = formatterdate.format(cal_first.getTime());
+                  int viewdates = getDateCheck(currentdate,dates);
+                  if(viewdates != 0) {
+
+                      int values = getDateCheck(firstDate, dates);
+                      Log.d(TAG, "onItemClick: " + values);
+//                if(firstDate.equals(seconDate)){
 //                    dateType =false;
-                    seconDate = dates;
+//                }
+                      if (values == 1) {
+//                    dateType =false;
+                          seconDate = dates;
+
 //                    selectDate = true;
 //                    selectDateValue = true;
 //                  //  openRangePicker(firstDate,seconDate,true);
-                    itemClicked.calanderIItemClicked(firstDate,seconDate,true);
-                } else {
-                    if(listDaysRate != null)
-                        listDaysRate.clear();
-                    allEvents.clear();
-                    dateType = true;
-                    firstDate = dates;
-                    setallevent(allEvents);
-                    selectDate =false;
-                    openRangePicker(firstDate,firstDate,false);
-                    itemClicked.calanderIItemClicked(firstDate,firstDate,false);
+                          itemClicked.calanderIItemClicked(firstDate, seconDate, true);
+                          firstDate = "";
+                          seconDate = "";
+                      } else {
+                          if (listDaysRate != null)
+                              listDaysRate.clear();
+                          allEvents.clear();
+                          dateType = true;
+                          firstDate = dates;
+                          setallevent(allEvents);
+                          selectDate = false;
+                          openRangePicker(firstDate, firstDate, false);
+                          itemClicked.calanderIItemClicked(firstDate, firstDate, false);
 
-                }
+                      }
 
-
+                  }else {
+                      Toast.makeText(context,"please select valid date",Toast.LENGTH_LONG).show();
+                  }
                 // openRangePicker("","");
 
                 //mAdapter.setview(position);
@@ -281,7 +292,35 @@ public class CalendarCustomView extends LinearLayout {
             }
         }
     }
+    private int getDateCheck (String firstdate, String seconddate){
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "MM/dd/yyyy");
+        Date convertedDate = new Date();
+        Date convertedDate2 = new Date();
+        long millis1 ;
+        long millis2 ;
+
+        try {
+            convertedDate = dateFormat.parse(firstdate);
+             millis1 = convertedDate.getTime();
+
+            convertedDate2 = dateFormat.parse(seconddate);
+            millis2 = convertedDate2.getTime();
+
+            if (millis1 > millis2) {
+                return 0;
+                // true
+            } else {
+                return 1;
+                //false
+            }
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+       return 3;
+    }
 
     private ArrayList getDatediff (String dateString1, String dateString2){
 
