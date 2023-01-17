@@ -24,7 +24,7 @@ class CalanderAct : AppCompatActivity() {
         mView = findViewById(R.id.custom_calendar_view) as CalendarCustomView
         var btn  = findViewById(R.id.btn) as Button
         btn.setOnClickListener {
-
+            mView!!.setClearAllData()
             //openRangePicker("15/01/2023","23/02/2023")
         }
 
@@ -62,12 +62,16 @@ class CalanderAct : AppCompatActivity() {
                 if(b){
                     val startDate = Calendar.getInstance()
                     val formatterdate = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-                    startDate.time = formatterdate.parse("24/01/2023")
+                    startDate.time = formatterdate.parse("17/01/2023")
 
                     val endDate = Calendar.getInstance()
                     val formatterdatev1 = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-                    endDate.time = formatterdatev1.parse("22/01/2023")
+                    endDate.time = formatterdatev1.parse("20/01/2023")
 
+
+                    val endDatev1 = Calendar.getInstance()
+                    val formatterdatev2 = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+                    endDatev1.time = formatterdatev2.parse("24/01/2023")
 
                     var dayName = EventObjectsTime()
                     dayName.dayname = "Saturday"
@@ -82,6 +86,15 @@ class CalanderAct : AppCompatActivity() {
                     dayName1.date = endDate.time
 
                     listDaysRate.add(dayName1)
+
+
+
+                    var dayName2 = EventObjectsTime()
+                    dayName2.dayname = "Wednesday"
+                    dayName2.rates = "166"
+                    dayName2.date = endDatev1.time
+
+                    listDaysRate.add(dayName2)
 
                     mView!!.setArrayDataValue(listDaysRate,firstDate,secondDate)
 

@@ -63,7 +63,7 @@ public class CalendarCustomView extends LinearLayout {
 
     private GridAdapter mAdapter;
     private boolean dateType = false;
-    private String firstDate,seconDate;
+    private String firstDate = "",seconDate = "";
     private long CLICK_DURATION = 400; // TODO: your timeout here
 
 
@@ -92,8 +92,19 @@ public class CalendarCustomView extends LinearLayout {
         setArrayDataValue(listDaysRate,"","");
         setallevent(allEvents);
         openRangePicker("","", false);
+        setClearAllData();
 
         Log.d(TAG, "I need to call this method");
+    }
+
+    public void setClearAllData() {
+        if(listDaysRate != null)
+            listDaysRate.clear();
+        allEvents.clear();
+        dateType = true;
+        setallevent(allEvents);
+        selectDate =false;
+        openRangePicker("","",false);
     }
 
     public void setArrayDataValue(ArrayList<EventObjectsTime> listDaysRatev1,String firstdate, String seconddate) {
@@ -184,6 +195,9 @@ public class CalendarCustomView extends LinearLayout {
                 Calendar cal1 = Calendar.getInstance();
                 cal1.setTime(dayValueInCells.get(position));
                 String dates = formatterdate.format(cal1.getTime());
+                if(firstDate.equals(seconDate)){
+                    dateType =false;
+                }
                 if(dateType) {
 //                    dateType =false;
                     seconDate = dates;
@@ -298,23 +312,25 @@ public class CalendarCustomView extends LinearLayout {
                 index++;
                 dates.add(cal1.getTime());
                 int dayOfWeek = cal1.get(Calendar.DAY_OF_WEEK);
-               // String[] days = new String[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thrusday", "Friday", "Saturday" };
-               // String day = days[cal1.get(Calendar.DAY_OF_WEEK)-1];
+                // String[] days = new String[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thrusday", "Friday", "Saturday" };
+                // String day = days[cal1.get(Calendar.DAY_OF_WEEK)-1];
 
                 jdb = new EventObjects(dayOfWeek, "", cal1.getTime());
                 cal1.add(Calendar.DATE, 1);
                 // cal1.setTime(dates);
                 allEvents.add(jdb);
 
-                for (int k = 0; k < listDaysRate.size(); k++) {
-                    if(listDaysRate.get(k).getDate().equals(allEvents.get(index-1).getDate())) {
-                        jdb = new EventObjects(allEvents.get(index-1).id, listDaysRate.get(k).getRates(), allEvents.get(index-1).getDate());
-                        allEvents.set(index-1, jdb);
-                        break;
+
+                if (index - 1 < 7) {
+                    for (int k = 0; k < listDaysRate.size(); k++) {
+                        if (listDaysRate.get(k).getDate().equals(allEvents.get(index - 1).getDate())) {
+                            jdb = new EventObjects(allEvents.get(index - 1).id, listDaysRate.get(k).getRates(), allEvents.get(index - 1).getDate());
+                            allEvents.set(index - 1, jdb);
+                            break;
+                        }
                     }
                 }
             }
-
 //             if(allEvents.size() > 2)
 //             for (int k = 0; k < listDaysRate.size(); k++) {
 //                 if(listDaysRate.get(k).getDayname() == )

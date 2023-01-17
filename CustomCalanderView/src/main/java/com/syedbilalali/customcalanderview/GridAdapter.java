@@ -147,7 +147,7 @@ public class GridAdapter extends ArrayAdapter  {
               lv = (RelativeLayout)view.findViewById(R.id.event_wrapper);
 //            lv1 = (LinearLayout)view.findViewById(R.id.event_backgroundv1);
 //            lv2 = (LinearLayout)view.findViewById(R.id.event_backgroundv2);
-              maincell = (LinearLayout)view.findViewById(R.id.lir);
+             maincell = (LinearLayout)view.findViewById(R.id.lir);
 
 //            lv1.setVisibility(View.GONE);
 //            lv2.setVisibility(View.GONE);

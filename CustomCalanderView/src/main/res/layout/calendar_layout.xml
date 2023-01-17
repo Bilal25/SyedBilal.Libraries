@@ -141,7 +141,7 @@
         <GridView
             android:id="@+id/calendar_grid"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="230dp"
             android:padding="5dp"
             android:numColumns="7"/>
 
