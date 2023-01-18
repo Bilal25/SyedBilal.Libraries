@@ -16,6 +16,8 @@ import java.util.*
 class CalanderAct : AppCompatActivity() {
     var allEvents = java.util.ArrayList<EventObjects>()
     var mView: CalendarCustomView? = null
+    var firstdate = ""
+    var seconddate = ""
     private val listDaysRate: ArrayList<EventObjectsTime?> = ArrayList<EventObjectsTime?>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,9 +25,53 @@ class CalanderAct : AppCompatActivity() {
         setContentView(R.layout.activity_main_calander)
         mView = findViewById(R.id.custom_calendar_view) as CalendarCustomView
         var btn  = findViewById(R.id.btn) as Button
+
+        var btc  = findViewById(R.id.ccc) as Button
+        btc.setOnClickListener {
+            listDaysRate.clear()
+            val endDatev1 = Calendar.getInstance()
+            val formatterdatev2 = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+            endDatev1.time = formatterdatev2.parse("25/01/2023")
+
+
+            var dayName2 = EventObjectsTime()
+            dayName2.dayname = "Wednesday"
+            dayName2.rates = "25"
+            dayName2.date = endDatev1.time
+
+            listDaysRate.add(dayName2)
+
+        }
+
+
+
         btn.setOnClickListener {
-            mView!!.setClearAllData()
+           // mView!!.setClearAllData()
             //openRangePicker("15/01/2023","23/02/2023")
+            listDaysRate.clear()
+
+            val startDate = Calendar.getInstance()
+            val formatterdate = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+            startDate.time = formatterdate.parse("19/01/2023")
+
+            val endDate = Calendar.getInstance()
+            val formatterdatev1 = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+            endDate.time = formatterdatev1.parse("21/01/2023")
+
+            var dayName = EventObjectsTime()
+            dayName.dayname = "Saturday"
+            dayName.rates = "19"
+            dayName.date = startDate.time
+
+            listDaysRate.add(dayName)
+
+            var dayName1 = EventObjectsTime()
+            dayName1.dayname = "Wednesday"
+            dayName1.rates = "21"
+            dayName1.date = endDate.time
+
+            listDaysRate.add(dayName1)
+
         }
 
 
@@ -60,42 +106,11 @@ class CalanderAct : AppCompatActivity() {
             override fun calanderIItemClicked(firstDate: String?, secondDate: String?, b: Boolean) {
                 Log.d("TAG", "calanderIItemClicked: "+firstDate +secondDate + b)
                 if(b){
-                    val startDate = Calendar.getInstance()
-                    val formatterdate = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-                    startDate.time = formatterdate.parse("19/01/2023")
-
-                    val endDate = Calendar.getInstance()
-                    val formatterdatev1 = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-                    endDate.time = formatterdatev1.parse("20/01/2023")
-
-
-                    val endDatev1 = Calendar.getInstance()
-                    val formatterdatev2 = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-                    endDatev1.time = formatterdatev2.parse("24/01/2023")
-
-                    var dayName = EventObjectsTime()
-                    dayName.dayname = "Saturday"
-                    dayName.rates = "1452"
-                    dayName.date = startDate.time
-
-                    listDaysRate.add(dayName)
-
-                    var dayName1 = EventObjectsTime()
-                    dayName1.dayname = "Wednesday"
-                    dayName1.rates = "1466"
-                    dayName1.date = endDate.time
-
-                    listDaysRate.add(dayName1)
 
 
 
-                    var dayName2 = EventObjectsTime()
-                    dayName2.dayname = "Wednesday"
-                    dayName2.rates = "166"
-                    dayName2.date = endDatev1.time
-
-                    listDaysRate.add(dayName2)
-
+                    firstdate = firstDate!!;
+                    seconddate = secondDate!!
                     mView!!.setArrayDataValue(listDaysRate,firstDate,secondDate)
 
                 }

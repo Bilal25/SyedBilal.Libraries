@@ -123,8 +123,8 @@ public class CalendarCustomView extends LinearLayout {
 
     public void setallevent(ArrayList<EventObjects> list) {
        // allEvents.addAll(list);
-        if(mAdapter != null){
-            mAdapter.update(list,firstDate,seconDate,list,listDaysRate,dayValueData);
+         if(mAdapter != null){
+             mAdapter.update(list,firstDate,seconDate,list,listDaysRate,dayValueData);
              mAdapter.notifyDataSetChanged();
         }
     }
@@ -215,7 +215,8 @@ public class CalendarCustomView extends LinearLayout {
                           allEvents.clear();
                           dateType = true;
                           firstDate = dates;
-                          setallevent(allEvents);
+                          //setallevent(allEvents);
+                          setUpCalendarAdapter();
                           selectDate = false;
                           openRangePicker(firstDate, firstDate, false);
                           itemClicked.calanderIItemClicked(firstDate, firstDate, false);
