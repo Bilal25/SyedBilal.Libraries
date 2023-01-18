@@ -293,20 +293,50 @@ public class CalendarCustomView extends LinearLayout {
         long millis2 ;
 
         try {
-            convertedDate = dateFormat.parse(firstdate);
-             millis1 = convertedDate.getTime();
+//            convertedDate = dateFormat.parse(firstdate);
+//             millis1 = convertedDate.getTime();
 
-            convertedDate2 = dateFormat.parse(seconddate);
-            millis2 = convertedDate2.getTime();
 
-            if (millis1 > millis2) {
-                return 0;
-                // true
-            } else {
-                return 1;
-                //false
+            Date date1 = null;
+            Date date2 = null;
+
+            try {
+                DateFormat df1 = new SimpleDateFormat("dd/MM/yyyy");
+                date1 = df1.parse(firstdate);
+                date2 = df1.parse(seconddate);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-        } catch (ParseException e) {
+
+            Calendar cal1 = Calendar.getInstance();
+            cal1.setTime(date1);
+            Calendar cal2 = Calendar.getInstance();
+            cal2.setTime(date2);
+
+            if (!cal1.after(cal2)) {
+
+                return 1;
+                // selected date is after current date
+            } else {
+                return 0;
+                // selected date is not after current date
+            }
+
+
+
+
+//            convertedDate2 = dateFormat.parse(seconddate);
+//            millis2 = convertedDate2.getTime();
+
+//            if (milliseconds < millisecondsv1) {
+//                return 1;
+//                // true
+//            } else {
+//                return 0;
+//                //false
+//            }
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
