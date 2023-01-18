@@ -198,19 +198,13 @@ public class CalendarCustomView extends LinearLayout {
                   String currentdate = formatterdate.format(cal_first.getTime());
                   int viewdates = getDateCheck(currentdate,dates);
                   if(viewdates != 0) {
-
                       int values = getDateCheck(firstDate, dates);
                       Log.d(TAG, "onItemClick: " + values);
-//                if(firstDate.equals(seconDate)){
-//                    dateType =false;
-//                }
+                      if (firstDate.equals(dates)){
+                          values = 0;
+                      }
                       if (values == 1) {
-//                    dateType =false;
                           seconDate = dates;
-
-//                    selectDate = true;
-//                    selectDateValue = true;
-//                  //  openRangePicker(firstDate,seconDate,true);
                           itemClicked.calanderIItemClicked(firstDate, seconDate, true);
                           firstDate = "";
                           seconDate = "";
@@ -230,9 +224,6 @@ public class CalendarCustomView extends LinearLayout {
                   }else {
                       Toast.makeText(context,"please select valid date",Toast.LENGTH_LONG).show();
                   }
-                // openRangePicker("","");
-
-                //mAdapter.setview(position);
             }
         });
     }
