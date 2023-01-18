@@ -62,7 +62,7 @@ class CalanderAct : AppCompatActivity() {
                 if(b){
                     val startDate = Calendar.getInstance()
                     val formatterdate = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-                    startDate.time = formatterdate.parse("17/01/2023")
+                    startDate.time = formatterdate.parse("19/01/2023")
 
                     val endDate = Calendar.getInstance()
                     val formatterdatev1 = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)

@@ -3,7 +3,6 @@ package com.syedbilalali.customcalanderview;
 
 
 import static com.syedbilalali.customcalanderview.CalendarCustomView.selectDate;
-import static com.syedbilalali.customcalanderview.CalendarCustomView.selectDateValue;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -16,26 +15,23 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 
 public class GridAdapter extends ArrayAdapter  {
     private static final String TAG = GridAdapter.class.getSimpleName();
     private LayoutInflater mInflater;
-    public static List<Date> monthlyDates;
+    public static ArrayList<EventObjectsSecond> monthlyDates;
     private SimpleDateFormat formatter = new SimpleDateFormat("dd", Locale.ENGLISH);
     private Calendar currentDate;
     private  ArrayList<EventObjects> allEventV1 = new ArrayList<>();
@@ -47,13 +43,13 @@ public class GridAdapter extends ArrayAdapter  {
     public static boolean dateTypev = false;
     private int previousposition= 0;
     public static String firstDate,seconDate;
-
+    private ArrayList<EventObjectsTime> listDaysRate = new ArrayList();
     String updatemonth,updateyear,currentda;
     String sDate;
     String checkdate;
     private  boolean countValueStatus = false;
-    private String firstRate;
-    private String secondRate;
+    private String firstRate = "";
+    private String secondRate = "";
     private Date oneWayTripDate;
     int monthcur = 0;
     private Date firstDateView;
@@ -61,7 +57,7 @@ public class GridAdapter extends ArrayAdapter  {
     int daa,ye,mnth;
 
 
-    public GridAdapter(Context context, List<Date> monthlyDates, Calendar currentDate, ArrayList<EventObjects> allEvent) {
+    public GridAdapter(Context context, ArrayList<EventObjectsSecond> monthlyDates, Calendar currentDate, ArrayList<EventObjects> allEvent) {
         super(context, R.layout.single_cell_layout);
         this.monthlyDates = monthlyDates;
         this.currentDate = currentDate;
@@ -83,15 +79,15 @@ public class GridAdapter extends ArrayAdapter  {
     @NonNull
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        Date mDate = monthlyDates.get(position);
+        EventObjectsSecond mDate = monthlyDates.get(position);
         final TextView cellNumber,calanderrate;
        // final LinearLayout lv1,lv2;
         final RelativeLayout lv;
         final LinearLayout maincell;
         final View eventIndicator,eventIndicatorday;
         Calendar dateCal = Calendar.getInstance();
-        dateCal.setTime(mDate);
-        sDate = formatter.format(mDate.getTime());
+        dateCal.setTime(mDate.getDate());
+        sDate = formatter.format(mDate.getDate().getTime());
         ///String mnth = formatter.format(mDate.getTime().g);
         Log.d(TAG, "Number of date " + sDate);
 
@@ -172,6 +168,8 @@ public class GridAdapter extends ArrayAdapter  {
 
             if (displayMonth == currentMonth && displayYear == currentyearv1) {
                 if (dayValue >= currentdascal || displayMonth > currentMonthcal) {
+
+
                     if(dayValue == currentdascal && displayMonth == currentMonthcal && displayYear == currentyearv1){
                         cellNumber.setTextColor(ContextCompat.getColor(getContext(), R.color.colorOrange));
 
@@ -184,6 +182,7 @@ public class GridAdapter extends ArrayAdapter  {
                         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                         Date netDate = null;
                         try {
+
 
                             Calendar firstDateCal = Calendar.getInstance();
                             firstDateCal.setTime(firstDateView);
@@ -203,6 +202,7 @@ public class GridAdapter extends ArrayAdapter  {
 
                                 if (selectDate) {
                                  //   if(eventsFirstLast.size() != 1)
+                                    calanderrate.setTextColor(Color.WHITE);
                                     maincell.setBackgroundResource(R.drawable.cellleftv1);
 
                                 }
@@ -241,6 +241,9 @@ public class GridAdapter extends ArrayAdapter  {
                                 if (selectDate) {
                                   //  if(eventsFirstLast.size() != 1)
                                         maincell.setBackgroundResource(R.drawable.cellrightv1);
+
+
+
                                 }
 //                                if (eventsFirstLast.size() > 2) {
 //                                    maincell.setBackgroundResource(R.drawable.cellrightv1);
@@ -253,6 +256,8 @@ public class GridAdapter extends ArrayAdapter  {
 
 
                         if (countValueStatus) {
+                            calanderrate.setVisibility(View.VISIBLE);
+                            calanderrate.setText(mDate.getMessage());
                             callrecycler(null, null, eventsFirstLast, lv, cellNumber, dayValue, null, sDate, displayMonth, maincell, calanderrate);
                         }
                     }
@@ -296,14 +301,16 @@ public class GridAdapter extends ArrayAdapter  {
         }
         return view;
     }
-    public void update(ArrayList<EventObjects> list, String firstdate, String seconddate, ArrayList arrayList) {
+    public void update(ArrayList<EventObjects> list, String firstdate, String seconddate, ArrayList<EventObjects> eventObjects, ArrayList<EventObjectsTime> listDaysRatev, ArrayList<EventObjectsSecond> dayValueDatav1) {
         countValueStatus = false;
+        monthlyDates = dayValueDatav1;
         eventsFirstLast.clear();
         eventsFirstLast.addAll(list);
+        listDaysRate.addAll(listDaysRatev);
 
         if(eventsFirstLast.size() > 0){
-        this.firstRate = eventsFirstLast.get(0).getMessage();
-        this.secondRate =  eventsFirstLast.get(eventsFirstLast.size() - 1).getMessage();
+      //  this.firstRate = eventsFirstLast.get(0).getMessage();
+     //   this.secondRate =  eventsFirstLast.get(eventsFirstLast.size() - 1).getMessage();
         firstDateView = eventsFirstLast.get(0).getDate();
         secondDateView = eventsFirstLast.get(eventsFirstLast.size() - 1).getDate();}
             if (eventsFirstLast.size() > 2) {
@@ -327,8 +334,8 @@ public class GridAdapter extends ArrayAdapter  {
                    // eventIndicator.setVisibility(View.VISIBLE);
                          maincell.setBackgroundColor(Color.parseColor("#E6E6E6"));
                         if(!eventsFirstLast.get(k).getMessage().equals("")){
-                        calanderrate.setVisibility(View.VISIBLE);
-                        calanderrate.setText(eventsFirstLast.get(k).getMessage());
+                        //calanderrate.setVisibility(View.VISIBLE);
+                        //calanderrate.setText(eventsFirstLast.get(k).getMessage());
                     }
 
                     break;

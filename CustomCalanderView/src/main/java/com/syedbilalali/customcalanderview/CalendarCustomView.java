@@ -23,7 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 
@@ -48,9 +47,11 @@ public class CalendarCustomView extends LinearLayout {
     public static boolean selectDateValue = false;
     private ArrayList<EventObjects> allEvents = new ArrayList<>();
     private  ArrayList<EventObjects> allEventsV2 = new ArrayList<>();
+
+    private ArrayList<EventObjectsSecond> dayValueData = new ArrayList<>();
     //testcommit
     //  var allEvents = java.util.ArrayList<EventObjects>()
-    List<Date> dayValueInCells = new ArrayList<Date>();
+  //  List<Date> dayValueInCells = new ArrayList<Date>();
     // ArrayList<jobdatasave> sy = new ArrayList<jobdatasave>();
     // private List<jobdatasave> jobarr;
     private static final int MAX_CALENDAR_COLUMN = 42;
@@ -123,7 +124,7 @@ public class CalendarCustomView extends LinearLayout {
     public void setallevent(ArrayList<EventObjects> list) {
        // allEvents.addAll(list);
         if(mAdapter != null){
-            mAdapter.update(list,firstDate,seconDate,list);
+            mAdapter.update(list,firstDate,seconDate,list,listDaysRate,dayValueData);
              mAdapter.notifyDataSetChanged();
         }
     }
@@ -193,7 +194,7 @@ public class CalendarCustomView extends LinearLayout {
 
                 SimpleDateFormat formatterdate = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
                  Calendar cal1 = Calendar.getInstance();
-                cal1.setTime(dayValueInCells.get(position));
+                cal1.setTime(dayValueData.get(position).getDate());
                 String dates = formatterdate.format(cal1.getTime());
                   String currentdate = formatterdate.format(cal_first.getTime());
                   int viewdates = getDateCheck(currentdate,dates);
@@ -229,29 +230,33 @@ public class CalendarCustomView extends LinearLayout {
     }
 
     public void setUpCalendarAdapter(){
-        dayValueInCells = new ArrayList<Date>();
+      //  dayValueInCells = new ArrayList<Date>();
+        dayValueData = new ArrayList<EventObjectsSecond>();
         Calendar mCal = (Calendar)cal.clone();
         mCal.set(Calendar.DAY_OF_MONTH, 1);
         int firstDayOfTheMonth = mCal.get(Calendar.DAY_OF_WEEK) - 1;
         mCal.add(Calendar.DAY_OF_MONTH, -firstDayOfTheMonth);
         // while(dayValueInCells.size() < MAX_CALENDAR_COLUMN){
-        dayValueInCells.clear();
+        dayValueData.clear();
         for (int k =0 ; k < MAX_CALENDAR_COLUMN; k++){
-            dayValueInCells.add(mCal.getTime());
+            EventObjectsSecond eventObjectsTime = new EventObjectsSecond();
+            eventObjectsTime.setDate(mCal.getTime());
+            eventObjectsTime.setMessage("");
+            dayValueData.add(eventObjectsTime);
             mCal.add(Calendar.DAY_OF_MONTH, 1);
             int u = mCal.getTime().getDay();
 
         }
-        Log.d(TAG, "Number of date " + dayValueInCells.size());
+        Log.d(TAG, "Number of date " + dayValueData.size());
         String sDate = formatter.format(cal.getTime());
         currentDate.setText(sDate);
         dateset = String.valueOf(sDate);
-        mAdapter = new GridAdapter(context, dayValueInCells, cal, allEvents);
+        mAdapter = new GridAdapter(context, dayValueData, cal, allEvents);
         calendarGridView.setAdapter(mAdapter);
 
 
             if(allEvents.size() > 2){
-                mAdapter.update(allEvents,firstDate,seconDate,allEvents);
+                mAdapter.update(allEvents,firstDate,seconDate,allEvents,listDaysRate, dayValueData);
             }
 
 
@@ -278,6 +283,22 @@ public class CalendarCustomView extends LinearLayout {
             allEventsV2.clear();
             ArrayList dates = getDatediff(firstdate, seconddate);
             if (dates != null) {
+
+                for (int k = 0; k < listDaysRate.size(); k++) {
+                    for (int j = 0; j < dayValueData.size(); j++) {
+                        DateFormat df1 = new SimpleDateFormat("dd/MM/yyyy");
+                        String fisrtDatev1 = df1.format(dayValueData.get(j).getDate());
+                        String secondDatev1 = df1.format(listDaysRate.get(k).getDate());
+                        if (fisrtDatev1.equals(secondDatev1)) {
+                            EventObjectsSecond eventObjectsSecond = new EventObjectsSecond();
+                            eventObjectsSecond.setDate(dayValueData.get(j).getDate());
+                            eventObjectsSecond.setMessage(listDaysRate.get(k).getRates());
+                            dayValueData.set(j,eventObjectsSecond);
+                            break;
+                        }
+                    }
+                }
+
                 allEventsV2.addAll(dates);
                 setallevent(dates);
             }
@@ -381,15 +402,25 @@ public class CalendarCustomView extends LinearLayout {
                 allEvents.add(jdb);
 
 
-                if (index - 1 < 7) {
-                    for (int k = 0; k < listDaysRate.size(); k++) {
-                        if (listDaysRate.get(k).getDate().equals(allEvents.get(index - 1).getDate())) {
-                            jdb = new EventObjects(allEvents.get(index - 1).id, listDaysRate.get(k).getRates(), allEvents.get(index - 1).getDate());
-                            allEvents.set(index - 1, jdb);
-                            break;
-                        }
-                    }
-                }
+//                if (index - 1 < 7) {
+//                    for (int k = 0; k < listDaysRate.size(); k++) {
+//                        if (listDaysRate.get(k).getDate().equals(allEvents.get(index - 1).getDate())) {
+//                            jdb = new EventObjects(allEvents.get(index - 1).id, listDaysRate.get(k).getRates(), allEvents.get(index - 1).getDate());
+//                            allEvents.set(index - 1, jdb);
+//                            break;
+//                        }
+//                    }
+//                }
+
+
+
+//                            if (dayValueData.get(k).getDate().equals(listDaysRate.get(index - 1).getDate())) {
+//                            jdb = new EventObjects(allEvents.get(index - 1).id, listDaysRate.get(k).getRates(), allEvents.get(index - 1).getDate());
+//                            allEvents.set(index - 1, jdb);
+//                            break;
+
+
+
             }
 //             if(allEvents.size() > 2)
 //             for (int k = 0; k < listDaysRate.size(); k++) {
