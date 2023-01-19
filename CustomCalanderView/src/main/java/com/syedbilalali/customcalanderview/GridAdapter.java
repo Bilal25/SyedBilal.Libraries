@@ -245,6 +245,9 @@ public class GridAdapter extends ArrayAdapter  {
 
 
                                 }
+
+
+
 //                                if (eventsFirstLast.size() > 2) {
 //                                    maincell.setBackgroundResource(R.drawable.cellrightv1);
 //                                }
@@ -253,11 +256,12 @@ public class GridAdapter extends ArrayAdapter  {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-
-
-                        if (countValueStatus) {
+                        if(!mDate.getMessage().equals("")){
                             calanderrate.setVisibility(View.VISIBLE);
                             calanderrate.setText(mDate.getMessage());
+                        }
+
+                        if (countValueStatus) {
                             callrecycler(null, null, eventsFirstLast, lv, cellNumber, dayValue, null, sDate, displayMonth, maincell, calanderrate);
                         }
                     }
