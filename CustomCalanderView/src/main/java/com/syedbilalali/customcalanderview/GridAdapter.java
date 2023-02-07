@@ -258,7 +258,10 @@ public class GridAdapter extends ArrayAdapter  {
                         }
                         if(!mDate.getMessage().equals("")){
                             calanderrate.setVisibility(View.VISIBLE);
-                            calanderrate.setText(mDate.getMessage());
+                            if(mDate.getDescount() < 0){
+                               calanderrate.setTextColor(ContextCompat.getColor(getContext(), R.color.lightgreen));
+                            }
+                               calanderrate.setText(mDate.getMessage());
                         }
 
                         if (countValueStatus) {

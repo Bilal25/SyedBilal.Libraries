@@ -5,6 +5,16 @@ import java.util.Date;
 public class EventObjectsSecond {
     public int id;
 
+    public int getDescount() {
+        return descount;
+    }
+
+    public void setDescount(int descount) {
+        this.descount = descount;
+    }
+
+    public int descount;
+
     public void setId(int id) {
         this.id = id;
     }

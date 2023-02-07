@@ -5,6 +5,16 @@ import java.util.Date;
 public class EventObjectsTime {
     private String dayname;
     private String Rates;
+
+    public int getDescount() {
+        return descount;
+    }
+
+    public void setDescount(int descount) {
+        this.descount = descount;
+    }
+
+    private int descount;
     private int id = 0;
 
     public Date getDate() {
