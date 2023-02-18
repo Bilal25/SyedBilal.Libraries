@@ -62,18 +62,8 @@ public class GridAdapter extends ArrayAdapter  {
         this.monthlyDates = monthlyDates;
         this.currentDate = currentDate;
         this.allEventV1 = allEvent;
+        mInflater = LayoutInflater.from(context);
 
-         mInflater = LayoutInflater.from(context);
-         ///
-
-      /*  Calendar calNow = Calendar.getInstance();
-        Calendar calSet = (Calendar) calNow.clone();
-           calSet.get(Calendar.HOUR_OF_DAY);
-        calSet.get(Calendar.MINUTE);
-        calSet.get(Calendar.SECOND);
-        calSet.get(Calendar.MILLISECOND);
-        das  = calSet.get(Calendar.DAY_OF_MONTH);
-        calSet.get(Calendar.DAY_OF_WEEK);*/
     }
 
     @NonNull
@@ -81,34 +71,19 @@ public class GridAdapter extends ArrayAdapter  {
     public View getView(final int position, View convertView, ViewGroup parent) {
         EventObjectsSecond mDate = monthlyDates.get(position);
         final TextView cellNumber,calanderrate;
-       // final LinearLayout lv1,lv2;
         final RelativeLayout lv;
         final LinearLayout maincell;
         final View eventIndicator,eventIndicatorday;
         Calendar dateCal = Calendar.getInstance();
         dateCal.setTime(mDate.getDate());
         sDate = formatter.format(mDate.getDate().getTime());
-        ///String mnth = formatter.format(mDate.getTime().g);
         Log.d(TAG, "Number of date " + sDate);
-
-
-
-        // int dayss = sDate.get(Calendar.DAY_OF_MONTH);
-
-
         final int dayValue = dateCal.get(Calendar.DAY_OF_MONTH);
         final int displayMonth = dateCal.get(Calendar.MONTH) + 1;
         final int displayYear = dateCal.get(Calendar.YEAR);
         final int currentMonth = currentDate.get(Calendar.MONTH) + 1;
         final int currentdas = currentDate.get(Calendar.DAY_OF_MONTH);
         final  int yea = currentDate.get(Calendar.YEAR);
-
-
-//        if(!CalanderFragment.setmonth){
-//            CalanderFragment.setmonth = true;
-//            monthcur = currentMonth;
-//        }
-
 
         int currentYear = currentDate.get(Calendar.YEAR);
         final double hour = dateCal.HOUR;
@@ -132,8 +107,7 @@ public class GridAdapter extends ArrayAdapter  {
             if (view == null) {
                 view = mInflater.inflate(R.layout.single_cell_layout, parent, false);
             }
-//            eventIndicator = (View) view.findViewById(R.id.cscs);
-//            eventIndicatorday = (View) view.findViewById(R.id.csday);
+
 
             cellNumber = (TextView) view.findViewById(R.id.calendar_date_id);
 
@@ -142,22 +116,16 @@ public class GridAdapter extends ArrayAdapter  {
             cellNumber.setText(String.valueOf(dayValue));
 
               lv = (RelativeLayout)view.findViewById(R.id.event_wrapper);
-//            lv1 = (LinearLayout)view.findViewById(R.id.event_backgroundv1);
-//            lv2 = (LinearLayout)view.findViewById(R.id.event_backgroundv2);
              maincell = (LinearLayout)view.findViewById(R.id.lir);
 
-//            lv1.setVisibility(View.GONE);
-//            lv2.setVisibility(View.GONE);
+
             lv.setBackgroundResource(0);
             maincell.setBackgroundResource(0);
             cellNumber.setTextColor(Color.BLACK);
             calanderrate.setTextColor(ContextCompat.getColor(getContext(), R.color.colorfeedtextdes));
             maincell.setBackgroundColor(Color.WHITE);
             calanderrate.setVisibility(View.GONE);
-//            lv1.setBackgroundColor(Color.WHITE);
-//            lv2.setBackgroundColor(Color.WHITE);
-//            lv1.setVisibility(View.GONE);
-//            lv2.setVisibility(View.GONE);
+
 
             Calendar cal = Calendar.getInstance();
             final int currentMonthcal = cal.get(Calendar.MONTH) + 1;
@@ -282,13 +250,9 @@ public class GridAdapter extends ArrayAdapter  {
 
             if(previousposition != 0)
             if(previousposition == position){
-              ///  eventIndicatorday.setBackgroundColor(getContext().getResources().getColor(R.color.green_color));
-               // cellNumber.setBackgroundResource(Color.parseColor("#567845"));
-               // holder.tv1.setTextColor(Color.parseColor("#ffffff"));
             }
             else
             {
-               // eventIndicatorday.setVisibility(View.GONE);
                 cellNumber.setBackgroundResource(R.drawable.blankcircel);
             }
 
@@ -298,10 +262,6 @@ public class GridAdapter extends ArrayAdapter  {
                 if (dayValue == currentdas) {
                     cellNumber.setBackgroundResource(R.drawable.greencircle);
                      cellNumber.setTextColor(Color.GREEN);
-
-                    // cellNumber.setTextColor(Color.parseColor("#000"));
-                    // cellNumber.setBackgroundColor(R.color.black);
-                    //cellNumber.setBackgroundColor(Color.parseColor("#000"));
                 }
             }
 
@@ -319,10 +279,8 @@ public class GridAdapter extends ArrayAdapter  {
         listDaysRate.addAll(listDaysRatev);
 
         if(eventsFirstLast.size() > 0){
-      //  this.firstRate = eventsFirstLast.get(0).getMessage();
-     //   this.secondRate =  eventsFirstLast.get(eventsFirstLast.size() - 1).getMessage();
-        firstDateView = eventsFirstLast.get(0).getDate();
-        secondDateView = eventsFirstLast.get(eventsFirstLast.size() - 1).getDate();}
+            firstDateView = eventsFirstLast.get(0).getDate();
+              secondDateView = eventsFirstLast.get(eventsFirstLast.size() - 1).getDate();}
             if (eventsFirstLast.size() > 2) {
                 countValueStatus = true;
                 eventsFirstLast.remove(0); // removes the first item
@@ -339,14 +297,9 @@ public class GridAdapter extends ArrayAdapter  {
            Calendar dateCalv1 = Calendar.getInstance();
             dateCalv1.setTime(eventsFirstLast.get(k).getDate());
             final int displayMonthv1 = dateCalv1.get(Calendar.MONTH) + 1;
-            //   if(day.equals(date)){
                 if (day.equals(date) && displayMonthv1 == displayMonth) {
-                   // eventIndicator.setVisibility(View.VISIBLE);
                          maincell.setBackgroundColor(Color.parseColor("#E6E6E6"));
-                        if(!eventsFirstLast.get(k).getMessage().equals("")){
-                        //calanderrate.setVisibility(View.VISIBLE);
-                        //calanderrate.setText(eventsFirstLast.get(k).getMessage());
-                    }
+                        if(!eventsFirstLast.get(k).getMessage().equals("")){}
 
                     break;
             }
@@ -355,39 +308,6 @@ public class GridAdapter extends ArrayAdapter  {
 
     }
 
-    private String getDate2(String d) {
-        try {
-            //.DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-            // displayYear+"-"+"0"+currentMonth+"-"+dateno;
-            // DateFormat sdf = new SimpleDateFormat("EEE.dd-MMM-yyyy");
-            DateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy");
-            Date netDate = (new Date(Long.parseLong(d)));
-            return sdf.format(netDate);
-        } catch (Exception ignored) {
-            return "xx";
-        }
-    }
-
-    private String gettimesec(String jobtime) {
-        try {
-            // DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date netDate = sdf.parse(jobtime);
-
-            daa = netDate.getDay();
-            mnth = netDate.getMonth();
-            ye = netDate.getYear();
-
-            return netDate.getDay() + " hours " + netDate.getMonth() + " minutes " + netDate.getYear() + " seconds";
-
-            //return sdf.format(netDate);
-
-        } catch (Exception ignored) {
-            return "xx";
-        }
-
-    }
 
     @Override
     public int getCount() {
@@ -403,25 +323,4 @@ public class GridAdapter extends ArrayAdapter  {
         return monthlyDates.indexOf(item);
     }
 
-
-    private String getDate(String date) {
-        try {
-            //.DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-            // displayYear+"-"+"0"+currentMonth+"-"+dateno;
-            // DateFormat sdf = new SimpleDateFormat("EEE.dd-MMM-yyyy");
-            DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date netDate = (new Date(Long.parseLong(date)));
-            return sdf.format(netDate);
-        } catch (Exception ignored) {
-            return "xx";
-        }
-    }
-
-
-    public void setview(int position) {
-        previousposition = position;
-        notifyDataSetChanged();
-      //  cellNumber.setBackgroundResource(R.drawable.greencircle);
-
-    }
 }
