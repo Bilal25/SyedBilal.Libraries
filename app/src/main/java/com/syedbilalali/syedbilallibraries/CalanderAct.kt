@@ -52,11 +52,11 @@ class CalanderAct : AppCompatActivity() {
 
             val startDate = Calendar.getInstance()
             val formatterdate = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-            startDate.time = formatterdate.parse("19/01/2023")
+            startDate.time = formatterdate.parse("17/02/2023")
 
             val endDate = Calendar.getInstance()
             val formatterdatev1 = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-            endDate.time = formatterdatev1.parse("21/01/2023")
+            endDate.time = formatterdatev1.parse("22/02/2023")
 
             var dayName = EventObjectsTime()
             dayName.dayname = "Saturday"

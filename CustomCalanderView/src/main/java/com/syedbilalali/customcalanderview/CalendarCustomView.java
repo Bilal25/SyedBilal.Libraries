@@ -67,6 +67,7 @@ public class CalendarCustomView extends LinearLayout {
     private boolean dateType = false;
     private String firstDate = "",seconDate = "";
     private long CLICK_DURATION = 400; // TODO: your timeout here
+    private String firstDatev1 = "",seconDatev1 = "";
 
 
     private float x1;
@@ -78,6 +79,7 @@ public class CalendarCustomView extends LinearLayout {
     private float t2;
     private GestureDetector gestureDetector;
 
+     ArrayList<EventObjectsSecond> dayValueDataPrevious = new ArrayList<>();
 
     public CalendarCustomView(Context context) {
         super(context);
@@ -206,6 +208,8 @@ public class CalendarCustomView extends LinearLayout {
                       }
                       if (values == 1) {
                           seconDate = dates;
+                          firstDatev1 = firstDate;
+                          seconDatev1 = seconDate  ;
                           itemClicked.calanderIItemClicked(firstDate, seconDate, true);
                           firstDate = "";
                           seconDate = "";
@@ -232,6 +236,7 @@ public class CalendarCustomView extends LinearLayout {
 
     public void setUpCalendarAdapter(){
       //  dayValueInCells = new ArrayList<Date>();
+
         dayValueData = new ArrayList<EventObjectsSecond>();
         Calendar mCal = (Calendar)cal.clone();
         mCal.set(Calendar.DAY_OF_MONTH, 1);
@@ -256,8 +261,10 @@ public class CalendarCustomView extends LinearLayout {
         calendarGridView.setAdapter(mAdapter);
 
 
+
             if(allEvents.size() > 2){
-                mAdapter.update(allEvents,firstDate,seconDate,allEvents,listDaysRate, dayValueData);
+                openRangePicker(firstDatev1,seconDatev1,false);
+                //mAdapter.update(allEvents,firstDate,seconDate,allEvents,listDaysRate, dayValueData);
             }
 
 
