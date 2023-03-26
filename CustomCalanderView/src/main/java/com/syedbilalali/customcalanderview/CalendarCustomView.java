@@ -108,7 +108,7 @@ public class CalendarCustomView extends LinearLayout {
         Log.d(TAG, "I need to call this method");
     }
 
-    private void loadLangauge(String ar) {
+    public void loadLangauge(String ar) {
         langaugeCode = ar;
          numberFormat = NumberFormat.getInstance(new Locale(ar));
 
