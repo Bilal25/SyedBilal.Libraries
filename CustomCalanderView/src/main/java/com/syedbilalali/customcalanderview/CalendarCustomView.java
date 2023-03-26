@@ -3,6 +3,7 @@ package com.syedbilalali.customcalanderview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,6 +42,10 @@ public class CalendarCustomView extends LinearLayout {
     private GestureDetector mDetector;
     private LinearLayout linearLayout;
 
+    public static String langaugeCode;
+
+    public static NumberFormat numberFormat;
+
 
     private Calendar cal_first = Calendar.getInstance();
     private Calendar cal_second = Calendar.getInstance();
@@ -56,7 +62,7 @@ public class CalendarCustomView extends LinearLayout {
     // private List<jobdatasave> jobarr;
     private static final int MAX_CALENDAR_COLUMN = 42;
     private int month, year;
-    private SimpleDateFormat formatter = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
+    private SimpleDateFormat formatter ;
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
     private Context context;
     private  CalanderIItemClicked itemClicked;
@@ -78,7 +84,7 @@ public class CalendarCustomView extends LinearLayout {
     private float y2;
     private float t2;
     private GestureDetector gestureDetector;
-
+    private String lang = "en";
      ArrayList<EventObjectsSecond> dayValueDataPrevious = new ArrayList<>();
 
     public CalendarCustomView(Context context) {
@@ -88,6 +94,7 @@ public class CalendarCustomView extends LinearLayout {
     public CalendarCustomView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
+        loadLangauge(lang);
         initializeUILayout();
         setUpCalendarAdapter();
         setPreviousButtonClickEvent();
@@ -99,6 +106,18 @@ public class CalendarCustomView extends LinearLayout {
         setClearAllData();
 
         Log.d(TAG, "I need to call this method");
+    }
+
+    private void loadLangauge(String ar) {
+        langaugeCode = ar;
+         numberFormat = NumberFormat.getInstance(new Locale(ar));
+
+        Locale locale = new Locale(ar);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+
     }
 
     public void setClearAllData() {
@@ -150,6 +169,13 @@ public class CalendarCustomView extends LinearLayout {
                 return gestureDetector.onTouchEvent(event);
             }};
         calendarGridView.setOnTouchListener(gestureListener);
+        formatter  = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
+
+        if(langaugeCode == "ar"){
+           formatter  = new SimpleDateFormat("MMMM yyyy", new Locale("ar"));
+            previousButton.setScaleX(-1f);
+            nextButton.setScaleX(-1f);
+        }
     }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -469,12 +495,22 @@ public class CalendarCustomView extends LinearLayout {
                 // Left swipe
                 if (diff > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                    onLeftSwipe();
+                    if(langaugeCode == "ar"){
+                        onRightSwipeLanguage();
+                    }else {
+                        onLeftSwipe();
+
+                    }
 
                     // Right swipe
                 } else if (-diff > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                    onRightSwipe();
+                    if(langaugeCode == "ar"){
+                        onLeftSwipeLanguage();
+                    }else {
+                        onRightSwipe();
+
+                    }
                 }
             } catch (Exception e) {
                 Log.e("YourActivity", "Error on gestures");
@@ -492,5 +528,18 @@ public class CalendarCustomView extends LinearLayout {
         selectDateValue = false;
         cal.add(Calendar.MONTH, -1);
            setUpCalendarAdapter();
+    }
+
+
+    private void onLeftSwipeLanguage() {
+        selectDateValue = false;
+        cal.add(Calendar.MONTH, 1);
+        setUpCalendarAdapter();
+    }
+
+    private void onRightSwipeLanguage() {
+        selectDateValue = false;
+        cal.add(Calendar.MONTH, -1);
+        setUpCalendarAdapter();
     }
 }

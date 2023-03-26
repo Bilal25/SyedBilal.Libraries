@@ -2,6 +2,8 @@ package com.syedbilalali.customcalanderview;
 
 
 
+import static com.syedbilalali.customcalanderview.CalendarCustomView.langaugeCode;
+import static com.syedbilalali.customcalanderview.CalendarCustomView.numberFormat;
 import static com.syedbilalali.customcalanderview.CalendarCustomView.selectDate;
 
 import android.annotation.SuppressLint;
@@ -113,7 +115,9 @@ public class GridAdapter extends ArrayAdapter  {
 
             calanderrate = (TextView) view.findViewById(R.id.calander_rate);
 
-            cellNumber.setText(String.valueOf(dayValue));
+           /// cellNumber.setText(String.valueOf(dayValue));
+
+            cellNumber.setText(String.valueOf(numberFormat.format(dayValue)));
 
               lv = (RelativeLayout)view.findViewById(R.id.event_wrapper);
              maincell = (LinearLayout)view.findViewById(R.id.lir);
@@ -165,14 +169,21 @@ public class GridAdapter extends ArrayAdapter  {
 //                                 lv1.setVisibility(View.VISIBLE);
                                     if (!firstRate.equals("")) {
                                         calanderrate.setVisibility(View.VISIBLE);
-                                        calanderrate.setText(firstRate);
+                                        calanderrate.setText(String.valueOf(numberFormat.format(Double.parseDouble(firstRate))));
+                                       //calanderrate.setText(firstRate);
                                         calanderrate.setTextColor(Color.WHITE);
                                     }
 
                                     if (selectDate) {
                                         //   if(eventsFirstLast.size() != 1)
                                         calanderrate.setTextColor(Color.WHITE);
-                                        maincell.setBackgroundResource(R.drawable.cellleftv1);
+                                        if(langaugeCode == "ar"){
+                                            maincell.setBackgroundResource(R.drawable.cellleftv12);
+
+                                        }else {
+                                            maincell.setBackgroundResource(R.drawable.cellleftv1);
+
+                                        }
 
                                     }
 //                                    if (eventsFirstLast.size() > 2) {
@@ -204,12 +215,19 @@ public class GridAdapter extends ArrayAdapter  {
 //                             lv2.setVisibility(View.VISIBLE);
                                     if (!secondRate.equals("")) {
                                         calanderrate.setVisibility(View.VISIBLE);
-                                        calanderrate.setText(secondRate);
+                                      //  calanderrate.setText(secondRate);
+                                        calanderrate.setText(numberFormat.format(Double.parseDouble(secondRate)));
 
                                     }
                                     if (selectDate) {
                                         //  if(eventsFirstLast.size() != 1)
-                                        maincell.setBackgroundResource(R.drawable.cellrightv1);
+                                        if(langaugeCode == "ar"){
+                                            maincell.setBackgroundResource(R.drawable.cellrightv12);
+
+                                        }else {
+                                            maincell.setBackgroundResource(R.drawable.cellrightv1);
+                                        }
+
 
 
                                     }
@@ -228,7 +246,7 @@ public class GridAdapter extends ArrayAdapter  {
                                 if (mDate.getDescount() < 0) {
                                     calanderrate.setTextColor(ContextCompat.getColor(getContext(), R.color.lightgreen));
                                 }
-                                calanderrate.setText(mDate.getMessage());
+                                calanderrate.setText(numberFormat.format(Double.parseDouble(mDate.getMessage())));
                             }
 
                             if (countValueStatus) {
