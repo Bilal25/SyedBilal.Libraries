@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">eZhire</string>
+    <string name="sun">الأحد</string>
+    <string name="mon">الأحد</string>
+    <string name="tue">الثلاثاء</string>
+    <string name="wed">الأربعاء</string>
+    <string name="thu">الخميس</string>
+    <string name="fri">الجمعه</string>
+    <string name="sat">السبت</string>
+</resources>
