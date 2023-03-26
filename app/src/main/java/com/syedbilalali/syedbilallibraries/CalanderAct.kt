@@ -6,6 +6,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.syedbilalali.customcalanderview.CalanderIItemClicked
 import com.syedbilalali.customcalanderview.CalendarCustomView
+import com.syedbilalali.customcalanderview.CalendarCustomView.langaugeCode
 import com.syedbilalali.customcalanderview.EventObjects
 import com.syedbilalali.customcalanderview.EventObjectsTime
 import java.text.SimpleDateFormat
@@ -24,6 +25,9 @@ class CalanderAct : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_calander)
         mView = findViewById(R.id.custom_calendar_view) as CalendarCustomView
+        langaugeCode = "ar"
+
+
         var btn  = findViewById(R.id.btn) as Button
 
         var btc  = findViewById(R.id.ccc) as Button

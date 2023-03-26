@@ -42,7 +42,7 @@ public class CalendarCustomView extends LinearLayout {
     private GestureDetector mDetector;
     private LinearLayout linearLayout;
 
-    public static String langaugeCode;
+    public static String langaugeCode = "ar";
 
     public static NumberFormat numberFormat;
 
@@ -84,7 +84,7 @@ public class CalendarCustomView extends LinearLayout {
     private float y2;
     private float t2;
     private GestureDetector gestureDetector;
-    private String lang = "en";
+    public String lang = "";
      ArrayList<EventObjectsSecond> dayValueDataPrevious = new ArrayList<>();
 
     public CalendarCustomView(Context context) {
@@ -109,14 +109,13 @@ public class CalendarCustomView extends LinearLayout {
     }
 
     public void loadLangauge(String ar) {
-        langaugeCode = ar;
-         numberFormat = NumberFormat.getInstance(new Locale(ar));
-
-        Locale locale = new Locale(ar);
+        numberFormat = NumberFormat.getInstance(new Locale(langaugeCode));
+        Locale locale = new Locale(langaugeCode);
         Locale.setDefault(locale);
         Configuration config = new Configuration();
         config.locale = locale;
         getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+
 
     }
 
@@ -172,6 +171,7 @@ public class CalendarCustomView extends LinearLayout {
         formatter  = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
 
         if(langaugeCode == "ar"){
+
            formatter  = new SimpleDateFormat("MMMM yyyy", new Locale("ar"));
             previousButton.setScaleX(-1f);
             nextButton.setScaleX(-1f);
