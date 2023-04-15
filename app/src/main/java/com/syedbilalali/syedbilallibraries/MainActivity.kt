@@ -5,11 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.syedbilalali.customcalanderview.CalanderIItemClicked
+import com.syedbilalali.customcalanderview.CalendarCustomView
 
 class MainActivity : AppCompatActivity(){
+    var mView: CalendarCustomView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        mView = findViewById(R.id.custom_calendar_view) as CalendarCustomView
+        CalendarCustomView.langaugeCode = "ar"
+        mView!!.loadLangauge("ar")
 
         val intent = Intent(this@MainActivity, CalanderAct::class.java)
         startActivity(intent)

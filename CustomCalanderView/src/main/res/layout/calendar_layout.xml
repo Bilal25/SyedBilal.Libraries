@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_custom_calendar"
@@ -13,7 +12,6 @@
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:visibility="visible"
-        android:id="@+id/month"
         android:paddingBottom="5dp"
         android:background="@color/white"
         android:orientation="horizontal">
@@ -54,100 +52,100 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textSize="12sp"
-
         android:visibility="gone"
         android:gravity="center"/>
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:id="@+id/days"
-        android:gravity="center"
-        android:layout_below="@+id/month"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
+        android:orientation="horizontal">
         <TextView
             android:id="@+id/sun"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/sun"
+            android:gravity="center"
+            android:textSize="12sp"
             android:textColor="@color/colourBlack"
-            android:textSize="12sp" />
-
+            android:text="@string/sun"
+            android:textStyle="normal"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/mon"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/mon"
+            android:gravity="center"
             android:textColor="@color/colourBlack"
+            android:text="@string/mon"
             android:textSize="12sp"
-            android:layout_margin="16dp"
-            android:layout_toRightOf="@id/sun"/>
 
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/tue"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/tue"
+            android:gravity="center"
             android:textColor="@color/colourBlack"
+            android:text="@string/tue"
             android:textSize="12sp"
-            android:layout_margin="16dp"
-            android:layout_toRightOf="@id/mon"/>
-
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/wed"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/wed"
+            android:gravity="center"
             android:textColor="@color/colourBlack"
+            android:text="@string/wed"
             android:textSize="12sp"
-            android:layout_margin="16dp"
-            android:layout_toRightOf="@id/tue"/>
 
-
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/thu"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/thu"
+            android:gravity="center"
             android:textColor="@color/colourBlack"
+            android:text="@string/thu"
+            android:layout_marginTop="4dp"
             android:textSize="12sp"
-            android:layout_margin="16dp"
-            android:layout_toRightOf="@id/wed"/>
 
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/fri"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/fri"
-            android:layout_margin="16dp"
+            android:gravity="center"
             android:textColor="@color/colourBlack"
+            android:text="@string/fri"
+            android:layout_marginTop="4dp"
             android:textSize="12sp"
-            android:layout_toRightOf="@id/thu"/>
 
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/sat"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/sat"
+            android:gravity="center"
             android:textColor="@color/colourBlack"
+            android:text="@string/sat"
+            android:layout_marginTop="4dp"
             android:textSize="12sp"
-            android:layout_margin="16dp"
-            android:layout_toRightOf="@id/fri"/>
+            android:layout_weight="1"/>
+    </LinearLayout>
 
-    </RelativeLayout>
     <GridView
         android:id="@+id/calendar_grid"
         android:layout_width="match_parent"
         android:layout_height="280dp"
-        android:layout_below="@+id/days"
-        android:numColumns="7"
-        android:padding="5dp" />
+        android:padding="5dp"
+        android:numColumns="7"/>
 
 
 
 
-</RelativeLayout>
+</LinearLayout>
