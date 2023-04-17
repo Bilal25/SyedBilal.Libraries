@@ -260,6 +260,7 @@ public class GridAdapter extends ArrayAdapter  {
                 }else {
                     cellNumber.setTextColor(ContextCompat.getColor(getContext(), R.color.lightgrey));
 
+
                 }
             } else {
                 cellNumber.setTextColor(ContextCompat.getColor(getContext(), R.color.lightgrey));
