@@ -170,7 +170,7 @@ public class CalendarCustomView extends LinearLayout {
         calendarGridView.setOnTouchListener(gestureListener);
         formatter  = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
 
-        if(langaugeCode == "ar"){
+        if(langaugeCode.equals("ar")){
 
            formatter  = new SimpleDateFormat("MMMM yyyy", new Locale("ar"));
             previousButton.setScaleX(-1f);
@@ -495,7 +495,7 @@ public class CalendarCustomView extends LinearLayout {
                 // Left swipe
                 if (diff > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                    if(langaugeCode == "ar"){
+                    if(langaugeCode.equals("ar")){
                         onRightSwipeLanguage();
                     }else {
                         onLeftSwipe();
@@ -505,7 +505,7 @@ public class CalendarCustomView extends LinearLayout {
                     // Right swipe
                 } else if (-diff > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                    if(langaugeCode == "ar"){
+                    if(langaugeCode.equals("ar")){
                         onLeftSwipeLanguage();
                     }else {
                         onRightSwipe();

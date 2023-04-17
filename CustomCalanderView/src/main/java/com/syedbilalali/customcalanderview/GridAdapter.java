@@ -177,7 +177,7 @@ public class GridAdapter extends ArrayAdapter  {
                                     if (selectDate) {
                                         //   if(eventsFirstLast.size() != 1)
                                         calanderrate.setTextColor(Color.WHITE);
-                                        if(langaugeCode == "ar"){
+                                        if(langaugeCode.equals("ar")){
                                             maincell.setBackgroundResource(R.drawable.cellleftv12);
 
                                         }else {
@@ -221,7 +221,7 @@ public class GridAdapter extends ArrayAdapter  {
                                     }
                                     if (selectDate) {
                                         //  if(eventsFirstLast.size() != 1)
-                                        if(langaugeCode == "ar"){
+                                        if(langaugeCode.equals("ar")){
                                             maincell.setBackgroundResource(R.drawable.cellrightv12);
 
                                         }else {
