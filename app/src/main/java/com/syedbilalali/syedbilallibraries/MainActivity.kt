@@ -14,8 +14,8 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mView = findViewById(R.id.custom_calendar_view) as CalendarCustomView
-        CalendarCustomView.langaugeCode = "ar"
-        mView!!.loadLangauge("ar")
+        CalendarCustomView.langaugeCode = "en"
+        mView!!.loadLangauge("en")
 
         val intent = Intent(this@MainActivity, CalanderAct::class.java)
         startActivity(intent)

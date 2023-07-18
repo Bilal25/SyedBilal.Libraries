@@ -25,8 +25,8 @@ class CalanderAct : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_calander)
         mView = findViewById(R.id.custom_calendar_view) as CalendarCustomView
-        langaugeCode = "ar"
-        mView!!.loadLangauge("ar")
+        langaugeCode = "en"
+        mView!!.loadLangauge("en")
 
         var btn  = findViewById(R.id.btn) as Button
 

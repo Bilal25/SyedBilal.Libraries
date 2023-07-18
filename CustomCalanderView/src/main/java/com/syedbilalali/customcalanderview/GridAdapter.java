@@ -142,14 +142,131 @@ public class GridAdapter extends ArrayAdapter  {
                 if(displayMonth >= currentMonthcal) {
                     if (dayValue >= currentdascal || displayMonth > currentMonthcal) {
 
+                            if (dayValue <= currentdascal && displayMonth == currentMonthcal) {
+                                cellNumber.setTextColor(ContextCompat.getColor(getContext(), R.color.colorOrange));
+                                // cellNumber.setTextColor(Color.GRAY);
+                            } else {
+                                cellNumber.setTextColor(Color.BLACK);
+                            }
 
-                        if (dayValue == currentdascal && displayMonth == currentMonthcal && displayYear == currentyearv1) {
-                            cellNumber.setTextColor(ContextCompat.getColor(getContext(), R.color.colorOrange));
+
+                            if (eventsFirstLast.size() > 0) {
+                                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                                Date netDate = null;
+                                try {
+
+
+                                    Calendar firstDateCal = Calendar.getInstance();
+                                    firstDateCal.setTime(firstDateView);
+                                    String day = formatter.format(firstDateCal.getTime());
+                                    final int month = firstDateCal.get(Calendar.MONTH) + 1;
+
+                                    if (day.equals(sDate) && month == displayMonth) {
+                                        lv.setBackgroundResource(R.drawable.greencircle);
+                                        cellNumber.setTextColor(Color.WHITE);
+//                                 lv1.setBackgroundColor(Color.GRAY);
+//                                 lv1.setVisibility(View.VISIBLE);
+                                        if (!firstRate.equals("")) {
+                                            calanderrate.setVisibility(View.VISIBLE);
+                                            calanderrate.setText(String.valueOf(numberFormat.format(Double.parseDouble(firstRate))));
+                                            //calanderrate.setText(firstRate);
+                                            calanderrate.setTextColor(Color.WHITE);
+                                        }
+
+                                        if (selectDate) {
+                                            //   if(eventsFirstLast.size() != 1)
+                                            calanderrate.setTextColor(Color.WHITE);
+                                            if (langaugeCode.equals("ar")) {
+                                                maincell.setBackgroundResource(R.drawable.cellleftv12);
+
+                                            } else {
+                                                maincell.setBackgroundResource(R.drawable.cellleftv1);
+
+                                            }
+
+                                        }
+//                                    if (eventsFirstLast.size() > 2) {
+//                                    //maincell.setBackgroundResource(R.drawable.cellleft);
+//                                }
+                                    }
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+
+                                try {
+
+                                    Calendar secondDateCal = Calendar.getInstance();
+                                    secondDateCal.setTime(secondDateView);
+                                    String day = formatter.format(secondDateCal.getTime());
+                                    final int month = secondDateCal.get(Calendar.MONTH) + 1;
+
+
+                                    if (day.equals(sDate) && month == displayMonth) {
+
+
+                                        if (selectDate) {
+                                            lv.setBackgroundResource(R.drawable.darkcirlceboder);
+                                            cellNumber.setTextColor(Color.BLACK);
+                                        }
+//                             lv2.setBackgroundColor(Color.GRAY);
+//                             lv2.setVisibility(View.VISIBLE);
+                                        if (!secondRate.equals("")) {
+                                            calanderrate.setVisibility(View.VISIBLE);
+                                            //  calanderrate.setText(secondRate);
+                                            calanderrate.setText(numberFormat.format(Double.parseDouble(secondRate)));
+
+                                        }
+                                        if (selectDate) {
+                                            //  if(eventsFirstLast.size() != 1)
+                                            if (langaugeCode.equals("ar")) {
+                                                maincell.setBackgroundResource(R.drawable.cellrightv12);
+
+                                            } else {
+                                                maincell.setBackgroundResource(R.drawable.cellrightv1);
+                                            }
+
+
+                                        }
+
+
+//                                if (eventsFirstLast.size() > 2) {
+//                                    maincell.setBackgroundResource(R.drawable.cellrightv1);
+//                                }
+                                    }
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                if (!mDate.getMessage().equals("")) {
+                                    calanderrate.setVisibility(View.VISIBLE);
+                                    if (mDate.getDescount() < 0) {
+                                        calanderrate.setTextColor(ContextCompat.getColor(getContext(), R.color.lightgreen));
+                                    }
+                                    calanderrate.setText(numberFormat.format(Double.parseDouble(mDate.getMessage())));
+                                }
+
+                                if (countValueStatus) {
+                                    callrecycler(null, null, eventsFirstLast, lv, cellNumber, dayValue, null, sDate, displayMonth, maincell, calanderrate);
+                                }
+                            }
+
+
+
+
+                        }else {
+                                cellNumber.setTextColor(ContextCompat.getColor(getContext(), R.color.lightgrey));
+                        }
 
                         } else {
-                            cellNumber.setTextColor(Color.BLACK);
-
+                            cellNumber.setTextColor(ContextCompat.getColor(getContext(), R.color.lightgrey));
                         }
+
+
+
+            } else if(displayYear > currentyearv1) {
+
 
                         if (eventsFirstLast.size() > 0) {
                             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -170,17 +287,17 @@ public class GridAdapter extends ArrayAdapter  {
                                     if (!firstRate.equals("")) {
                                         calanderrate.setVisibility(View.VISIBLE);
                                         calanderrate.setText(String.valueOf(numberFormat.format(Double.parseDouble(firstRate))));
-                                       //calanderrate.setText(firstRate);
+                                        //calanderrate.setText(firstRate);
                                         calanderrate.setTextColor(Color.WHITE);
                                     }
 
                                     if (selectDate) {
                                         //   if(eventsFirstLast.size() != 1)
                                         calanderrate.setTextColor(Color.WHITE);
-                                        if(langaugeCode.equals("ar")){
+                                        if (langaugeCode.equals("ar")) {
                                             maincell.setBackgroundResource(R.drawable.cellleftv12);
 
-                                        }else {
+                                        } else {
                                             maincell.setBackgroundResource(R.drawable.cellleftv1);
 
                                         }
@@ -215,19 +332,18 @@ public class GridAdapter extends ArrayAdapter  {
 //                             lv2.setVisibility(View.VISIBLE);
                                     if (!secondRate.equals("")) {
                                         calanderrate.setVisibility(View.VISIBLE);
-                                      //  calanderrate.setText(secondRate);
+                                        //  calanderrate.setText(secondRate);
                                         calanderrate.setText(numberFormat.format(Double.parseDouble(secondRate)));
 
                                     }
                                     if (selectDate) {
                                         //  if(eventsFirstLast.size() != 1)
-                                        if(langaugeCode.equals("ar")){
+                                        if (langaugeCode.equals("ar")) {
                                             maincell.setBackgroundResource(R.drawable.cellrightv12);
 
-                                        }else {
+                                        } else {
                                             maincell.setBackgroundResource(R.drawable.cellrightv1);
                                         }
-
 
 
                                     }
@@ -254,15 +370,16 @@ public class GridAdapter extends ArrayAdapter  {
                             }
                         }
 
-                    } else {
-                        cellNumber.setTextColor(ContextCompat.getColor(getContext(), R.color.lightgrey));
-                    }
-                }else {
-                    cellNumber.setTextColor(ContextCompat.getColor(getContext(), R.color.lightgrey));
 
 
-                }
-            } else {
+
+
+
+
+
+
+            }else {
+
                 cellNumber.setTextColor(ContextCompat.getColor(getContext(), R.color.lightgrey));
 
             }
